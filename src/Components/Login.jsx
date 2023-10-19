@@ -5,7 +5,7 @@ import Modal from '../Components/ModalLogin'; // Ajusta la ruta según tu estruc
 import { useHistory } from "react-router";
 import { Redirect } from 'react-router-dom';
 
-const Login = ({onLoginSuccess, handleAuthentication}) => {
+const Login = () => {
   let history = useHistory ();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -26,21 +26,14 @@ const Login = ({onLoginSuccess, handleAuthentication}) => {
 
   const handleLogin = async () => {
     try {
-      //const response = await AuthService.login(username, password);
+      ///const response = await AuthService.login(username, password);
       //console.log('Respuesta del servidor:', response);
-      const mockToken = 'your-mock-token';
-      const mockRole = 'empleado';
-      // Verifica si el inicio de sesión fue exitoso y obtén el token y el rol del usuario
+      
       //const { token, role } = response;
-  
-      // Actualiza los estados
-      //setIsAuthenticated(!!token); // Si tienes un token, el usuario está autenticado
-     // setUserRole(role);
-     setIsAuthenticated(!!mockToken); // Si tienes un token, el usuario está autenticado
-     setUserRole(mockRole);
-      handleAuthentication(mockToken, mockRole);
-      localStorage.setItem('token', mockToken);
-      localStorage.setItem('role', mockRole );
+      //localStorage.setItem('token',response.token);
+      //localStorage.setItem('role', response.role);
+      //localStorage.setItem('id', response.id);
+      //localStorage.setItem('estado', response.estado);
       // Mostrar modal de éxito y redirigir a la página de inicio
       setLoginSuccess(true);
       setModalIsOpen(true);
@@ -50,10 +43,10 @@ const Login = ({onLoginSuccess, handleAuthentication}) => {
       // Restablecer los campos
       setUsername('');
       setPassword('');
-      console.log("esto es null", userRole)
-      onLoginSuccess()
-      // Llama a la función de callback para indicar el éxito del inicio de sesión
-     
+      history.push('/Home');
+     // Recargar la página
+      window.location.reload();
+
     } catch (error) {
       window.alert("Error credenciales inválidas");
       console.error('Error al iniciar sesión:', error.message);
@@ -64,9 +57,7 @@ const Login = ({onLoginSuccess, handleAuthentication}) => {
       setIsSuccessModal(false);
     }
   };
-  if (loginSuccess) {
-    return <Redirect to="/Home" />;
-  }
+
 
   return (
     <div className="login-container">

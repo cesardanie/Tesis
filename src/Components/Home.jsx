@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import '../Estilos/Home.css';
-import { Redirect } from 'react-router-dom';
+
 
 const Home = () => {
-  console.log("se muestra inicio de sesion")
+
+  
   return (
     <div className="home-container">
       <h1>Bienvenido al Menú principal</h1>
@@ -17,8 +18,11 @@ const Home = () => {
             </button>
         </div>
         <div className="option option-2"> {/* Clase de estilo única para la opción 2 */}
-          <h2>Opción 2</h2>
-          <p>Descripción de la opción 2.</p>
+          <h2>Certificados</h2>
+          <p>En esta Opcion podra sacar los certiicados de cesantias y pension.</p>
+          <button className="button"> {/* Agrega una clase de estilo para los botones */}
+                Gestionar Días
+            </button>
         </div>
         <div className="option option-3"> {/* Clase de estilo única para la opción 3 */}
           <h2>Opción 3</h2>
