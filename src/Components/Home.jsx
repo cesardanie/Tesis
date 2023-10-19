@@ -21,20 +21,29 @@ const Home = () => {
           <h2>Certificados</h2>
           <p>En esta Opcion podra sacar los certiicados de cesantias y pension.</p>
           <button className="button"> {/* Agrega una clase de estilo para los botones */}
-                Gestionar Días
+               Certificados
             </button>
         </div>
         <div className="option option-3"> {/* Clase de estilo única para la opción 3 */}
-          <h2>Opción 3</h2>
-          <p>Descripción de la opción 3.</p>
+          <h2>Pagos de Nomina</h2>
+          <p>En esta opcion se mostrara los pagos de nomina del empleado que esta autenticado</p>
+          <button className="button"> {/* Agrega una clase de estilo para los botones */}
+               Pagos de Nomina
+            </button>
         </div>
         <div className="option option-4"> {/* Clase de estilo única para la opción 4 */}
-          <h2>Opción 4</h2>
-          <p>Descripción de la opción 4.</p>
+          <h2>Certificados laborales</h2>
+          <p>En esta Opcion se expediran certificados laborales</p>
+          <button className="button"> {/* Agrega una clase de estilo para los botones */}
+               Certificados laborales
+            </button>
         </div>
         <div className="option option-5"> {/* Clase de estilo única para la opción 5 */}
-          <h2>Opción 5</h2>
-          <p>Descripción de la opción 5.</p>
+          <h2>Vacaciones  cambio de cuenta bancaria</h2>
+          <p>En esta opcion se podra modificar las Vacaciones, y el cambio de la cuenta bancaria a otro banco</p>
+          <button className="button"> {/* Agrega una clase de estilo para los botones */}
+               vacaciones y cambio de cuenta
+            </button>
         </div>
       </div>
     </div>

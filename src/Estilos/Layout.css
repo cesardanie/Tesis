@@ -1,0 +1,15 @@
+/* Layout.css */
+.layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  footer {
+    background-color: #333; /* Color de fondo del pie de página */
+    color: #00ff00; /* Color de texto verde */
+    text-align: center;
+    font-weight: bold; /* Texto en negrita */
+    padding: 10px 0;
+  }
+  

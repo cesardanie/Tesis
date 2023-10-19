@@ -11,7 +11,7 @@ function App() {
   return (
    
     <Router>
-
+      <Layout>
       <Switch>
         
         <Route path="/modallogin" exact component={ModalLogin} />
@@ -19,7 +19,7 @@ function App() {
         <Route path="/" exact component={Login}/>
         <Route path="*" component={NotFound} />
       </Switch>
-
+      </Layout>
     </Router>
   );
 }
