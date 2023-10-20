@@ -13,6 +13,14 @@ const redireccionarCertificados=()=>{
   history.push('/Certificados');
   window.location.reload();
 }
+const redireccionarPagodeNomina=()=>{
+  history.push('/PagodeNomina');
+  window.location.reload();
+}
+const redireccionarCertificadolaboral=()=>{
+  history.push('/CertificadoLaboral');
+  window.location.reload();
+}
   return (
     <div className="home-container">
       <h1>Bienvenido al Menú principal</h1>
@@ -35,22 +43,22 @@ const redireccionarCertificados=()=>{
         <div className="option option-3"> {/* Clase de estilo única para la opción 3 */}
           <h2>Pagos de Nomina</h2>
           <p>En esta opcion se mostrara los pagos de nomina del empleado que esta autenticado</p>
-          <button className="button"> {/* Agrega una clase de estilo para los botones */}
+          <button className="button" onClick={redireccionarPagodeNomina}>
                Pagos de Nomina
             </button>
         </div>
         <div className="option option-4"> {/* Clase de estilo única para la opción 4 */}
           <h2>Certificados laborales</h2>
           <p>En esta Opcion se expediran certificados laborales</p>
-          <button className="button"> {/* Agrega una clase de estilo para los botones */}
+          <button className="button" onClick={redireccionarCertificadolaboral}>
                Certificados laborales
             </button>
         </div>
         <div className="option option-5"> {/* Clase de estilo única para la opción 5 */}
-          <h2>Vacaciones  cambio de cuenta bancaria</h2>
-          <p>En esta opcion se podra modificar las Vacaciones, y el cambio de la cuenta bancaria a otro banco</p>
+          <h2>Cambio de cuenta bancaria</h2>
+          <p>el cambio de la cuenta bancaria a otro banco</p>
           <button className="button"> {/* Agrega una clase de estilo para los botones */}
-               vacaciones y cambio de cuenta
+             cambio de cuenta
             </button>
         </div>
       </div>

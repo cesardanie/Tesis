@@ -1,0 +1,25 @@
+/* HomeGerenteStyles.css */
+
+.option {
+    background-color: #87CEEB; /* Cambiar a un azul claro (puedes ajustar el valor hexadecimal según tus preferencias) */
+    color: #000; /* Cambiar a negro */
+    padding: 20px;
+    margin: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .button {
+    background-color: #0077b6; /* Cambiar a un azul más oscuro (puedes ajustar el valor hexadecimal según tus preferencias) */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  .button:hover {
+    background-color: #00537e; /* Cambiar a un tono más oscuro al pasar el mouse (puedes ajustar el valor hexadecimal según tus preferencias) */
+  }
+  

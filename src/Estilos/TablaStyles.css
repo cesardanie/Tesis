@@ -1,0 +1,33 @@
+/* TablaStyles.css */
+
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  .custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto; /* Esto centrará la tabla horizontalmente */
+    margin-top: 20px;
+}
+  .custom-table th, .custom-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .custom-table th {
+    background-color: #f2f2f2;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .custom-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .custom-table tr:hover {
+    background-color: #ddd;
+  }
+  

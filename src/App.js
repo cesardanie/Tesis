@@ -7,6 +7,9 @@ import NotFound from '../src/Components/NotFound';
 import Layout from './Components/Layout';
 import CalendarModule from './Components/CalendarModule';
 import Certificados from './Components/Certificados';
+import PagodeNomina from '../src/Components/PagodeNomina';
+import Certificadolaboral from './Components/Certificadolaboral';
+import HomeGerente from '../src/Components/HomeGerente';
 function App() {
 
 
@@ -15,6 +18,9 @@ function App() {
     <Router>
       <Layout>
       <Switch>
+        <Route path ='/Gerente' component={HomeGerente}/>
+        <Route path ='/CertificadoLaboral' component={Certificadolaboral}/>
+        <Route path ='/PagodeNomina' component={PagodeNomina}/>
         <Route path="/Certificados"  component={Certificados} />
         <Route path="/Calendario"  component={CalendarModule} />
         <Route path="/modallogin" exact component={ModalLogin} />
