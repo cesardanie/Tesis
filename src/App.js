@@ -6,6 +6,7 @@ import ModalLogin from '../src/Components/ModalLogin';
 import NotFound from '../src/Components/NotFound';
 import Layout from './Components/Layout';
 import CalendarModule from './Components/CalendarModule';
+import Certificados from './Components/Certificados';
 function App() {
 
 
@@ -14,6 +15,7 @@ function App() {
     <Router>
       <Layout>
       <Switch>
+        <Route path="/Certificados"  component={Certificados} />
         <Route path="/Calendario"  component={CalendarModule} />
         <Route path="/modallogin" exact component={ModalLogin} />
         <Route path="/Home"  component={Home} />
