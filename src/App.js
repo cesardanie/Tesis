@@ -11,6 +11,7 @@ import PagodeNomina from '../src/Components/PagodeNomina';
 import Certificadolaboral from './Components/Certificadolaboral';
 import HomeGerente from '../src/Components/HomeGerente';
 import CuentaBanco from './Components/CuentaBanco';
+import TablaDatosGerente from './Components/TablaDatosGerente';
 function App() {
 
 
@@ -19,6 +20,7 @@ function App() {
     <Router>
       <Layout>
       <Switch>
+        <Route path ='/TablaDatosGerente' component={TablaDatosGerente}/>
         <Route path ='/CuentaBanco' component={CuentaBanco}/>
         <Route path ='/Gerente' component={HomeGerente}/>
         <Route path ='/CertificadoLaboral' component={Certificadolaboral}/>

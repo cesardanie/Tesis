@@ -1,0 +1,45 @@
+.tabla-datos {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .tabla-datos th {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .tabla-datos td {
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+  
+  .aceptar {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 8px 16px; /* Ajusta el tamaño del botón aquí */
+    margin-right: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .rechazar {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 8px 16px; /* Ajusta el tamaño del botón aquí */
+    margin-right: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .comentario {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
