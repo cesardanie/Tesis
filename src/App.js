@@ -10,6 +10,7 @@ import Certificados from './Components/Certificados';
 import PagodeNomina from '../src/Components/PagodeNomina';
 import Certificadolaboral from './Components/Certificadolaboral';
 import HomeGerente from '../src/Components/HomeGerente';
+import CuentaBanco from './Components/CuentaBanco';
 function App() {
 
 
@@ -18,6 +19,7 @@ function App() {
     <Router>
       <Layout>
       <Switch>
+        <Route path ='/CuentaBanco' component={CuentaBanco}/>
         <Route path ='/Gerente' component={HomeGerente}/>
         <Route path ='/CertificadoLaboral' component={Certificadolaboral}/>
         <Route path ='/PagodeNomina' component={PagodeNomina}/>

@@ -21,6 +21,11 @@ const redireccionarCertificadolaboral=()=>{
   history.push('/CertificadoLaboral');
   window.location.reload();
 }
+const redireccionarCuentaBancaria=()=>{
+  history.push('/CuentaBanco');
+  console.log("se dio click")
+  window.location.reload();
+}
   return (
     <div className="home-container">
       <h1>Bienvenido al Menú principal</h1>
@@ -57,8 +62,8 @@ const redireccionarCertificadolaboral=()=>{
         <div className="option option-5"> {/* Clase de estilo única para la opción 5 */}
           <h2>Cambio de cuenta bancaria</h2>
           <p>el cambio de la cuenta bancaria a otro banco</p>
-          <button className="button"> {/* Agrega una clase de estilo para los botones */}
-             cambio de cuenta
+          <button className="button" onClick={redireccionarCuentaBancaria}>
+             Cambio de cuenta
             </button>
         </div>
       </div>
