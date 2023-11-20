@@ -3,6 +3,7 @@ import '../Estilos/LoginForm.css';
 import AuthService from '../Services/AuthService.js';
 import Modal from '../Components/ModalLogin'; // Ajusta la ruta según tu estructura de carpetas
 import { useHistory } from "react-router";
+import CryptoJS from "crypto-js";
 import { Redirect } from 'react-router-dom';
 
 const Login = () => {
