@@ -3,7 +3,7 @@ import '../Estilos/LoginForm.css';
 import AuthService from '../Services/AuthService.js';
 import Modal from '../Components/ModalLogin'; // Ajusta la ruta según tu estructura de carpetas
 import { useHistory } from "react-router";
-import CryptoJS from "crypto-js";
+
 import { Redirect } from 'react-router-dom';
 
 const Login = () => {
@@ -27,14 +27,15 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      ///const response = await AuthService.login(username, password);
-      //console.log('Respuesta del servidor:', response);
+
+      const response = await AuthService.login(username, password);
+      console.log('Respuesta del servidor:', response);
       
-      //const { token, role } = response;
-      //localStorage.setItem('token',response.token);
-      //localStorage.setItem('role', response.role);
-      //localStorage.setItem('id', response.id);
-      //localStorage.setItem('estado', response.estado);
+      const { token, role } = response;
+      localStorage.setItem('token',response.token);
+      localStorage.setItem('role', response.role);
+      localStorage.setItem('id', response.id);
+      localStorage.setItem('estado', response.estado);
       // Mostrar modal de éxito y redirigir a la página de inicio
       setLoginSuccess(true);
       setModalIsOpen(true);
