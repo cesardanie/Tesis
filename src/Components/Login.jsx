@@ -35,24 +35,37 @@ const Login = () => {
       // Realizar la solicitud de inicio de sesión
       const response = await AuthService.login(username, password);
       console.log('Respuesta del servidor:', response);
+      if(response.estado==='true'){
+        console.log("positivo")
+        const { token, role } = response;
+        localStorage.setItem('token', response.token);
+        localStorage.setItem('role', response.Rol);
+        localStorage.setItem('id', response.id);
+        localStorage.setItem('estado', response.estado);
+        // Mostrar modal de éxito y redirigir a la página de inicio
+        setLoginSuccess(true);
+        setModalIsOpen(true);
+        setModalMessage('Inicio de sesión exitoso. ¡Bienvenido!');
+        setIsSuccessModal(true);
+  
+        history.push('/Home');
+        // Recargar la página
+        window.location.reload();
+      }
+      if(response.estado==='false')
+      {
+        console.log("negativo")
+        window.alert("credenciales inválidas");
+        // Mostrar modal de error
+        setModalIsOpen(true);
+        setModalMessage('Error al iniciar sesión. Credenciales inválidas.');
+        setIsSuccessModal(false);
+                // Restablecer los campos
+                setUsername('');
+                setPassword('');
+        history.push('/');
+      }
 
-      const { token, role } = response;
-      localStorage.setItem('token', response.token);
-      localStorage.setItem('role', response.role);
-      localStorage.setItem('id', response.id);
-      localStorage.setItem('estado', response.estado);
-      // Mostrar modal de éxito y redirigir a la página de inicio
-      setLoginSuccess(true);
-      setModalIsOpen(true);
-      setModalMessage('Inicio de sesión exitoso. ¡Bienvenido!');
-      setIsSuccessModal(true);
-
-      // Restablecer los campos
-      setUsername('');
-      setPassword('');
-      history.push('/Home');
-      // Recargar la página
-      window.location.reload();
 
     } catch (error) {
       window.alert("Error credenciales inválidas");
