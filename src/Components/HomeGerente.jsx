@@ -2,6 +2,9 @@ import React, { useEffect } from 'react';
 import { useHistory } from "react-router";
 import '../Estilos/HomeGerenteStyless.css';
 
+var Rol = localStorage.getItem('role');
+var token = localStorage.getItem('token');
+var estado=localStorage.getItem('estado')
 const HomeGerente = () => {
   let history = useHistory();
 
@@ -19,7 +22,8 @@ const HomeGerente = () => {
     history.push('/PagodeNomina');
     window.location.reload();
   }
-
+if((Rol==='Administrador') &&(token!=undefined)&&(estado==='true'))
+{
   return (
     <div className="home-container">
       <h1>Bienvenido al Menú principal</h1>
@@ -63,6 +67,17 @@ const HomeGerente = () => {
       </div>
     </div>
   );
+
+}
+else{
+  return (
+    <div className="home-container">
+      <h1>No tienes permisos de administrador.</h1>
+      {/* Puedes agregar más contenido o redireccionar a otra página */}
+    </div>
+  );
+}
+
 };
 
 export default HomeGerente;

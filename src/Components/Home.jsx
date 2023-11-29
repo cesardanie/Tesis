@@ -3,6 +3,10 @@ import '../Estilos/Home.css';
 import { useHistory } from "react-router";
 
 
+var Rol = localStorage.getItem('role');
+var token = localStorage.getItem('token');
+var estado=localStorage.getItem('estado')
+
 const Home = () => {
   let history = useHistory ();
 const redireccionarDias=()=>{
@@ -26,6 +30,8 @@ const redireccionarCuentaBancaria=()=>{
   console.log("se dio click")
   window.location.reload();
 }
+if((Rol==='Empleado') &&(token!=undefined)&&(estado==='true'))
+{
   return (
     <div className="home-container">
       <h1>Bienvenido al Menú principal</h1>
@@ -69,6 +75,15 @@ const redireccionarCuentaBancaria=()=>{
       </div>
     </div>
   );
+}
+else{
+  return (
+    <div className="home-container">
+      <h1>No tienes permisos suficientes</h1>
+      {/* Puedes agregar más contenido o redireccionar a otra página */}
+    </div>
+  );
+}
 };
 
 export default Home;
