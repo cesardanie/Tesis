@@ -30,6 +30,16 @@ const redireccionarCuentaBancaria=()=>{
   console.log("se dio click")
   window.location.reload();
 }
+const cerrarSesion = () => {
+  // Eliminar datos de la sesión al hacer clic en cerrar sesión
+  localStorage.removeItem('role');
+  localStorage.removeItem('token');
+  localStorage.removeItem('estado');
+
+  // Redirigir a la página de inicio de sesión u otra página
+  history.push('/');
+  window.location.reload();
+}
 if((Rol==='Empleado') &&(token!=undefined)&&(estado==='true'))
 {
   return (
@@ -73,6 +83,10 @@ if((Rol==='Empleado') &&(token!=undefined)&&(estado==='true'))
             </button>
         </div>
       </div>
+              {/* Agregar el botón de cerrar sesión */}
+              <button className="button" onClick={cerrarSesion}>
+          Cerrar Sesión
+        </button>
     </div>
   );
 }

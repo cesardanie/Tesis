@@ -22,6 +22,16 @@ const HomeGerente = () => {
     history.push('/PagodeNomina');
     window.location.reload();
   }
+  const cerrarSesion = () => {
+    // Eliminar datos de la sesión al hacer clic en cerrar sesión
+    localStorage.removeItem('role');
+    localStorage.removeItem('token');
+    localStorage.removeItem('estado');
+  
+    // Redirigir a la página de inicio de sesión u otra página
+    history.push('/');
+    window.location.reload();
+  }
 if((Rol==='Administrador') &&(token!=undefined)&&(estado==='true'))
 {
   return (
@@ -64,7 +74,18 @@ if((Rol==='Administrador') &&(token!=undefined)&&(estado==='true'))
             cambio de cuenta
           </button>
         </div>
+        <div className="option">
+          <h2>Agregar Empleados</h2>
+           <p>En este modulo se podra gregar empleados nuevos y eliminar usuarios que ya no trabajen en la empresa </p>
+          <button className="button option">
+            Ingresar
+          </button>
+        </div>
       </div>
+                    {/* Agregar el botón de cerrar sesión */}
+        <button className="button" onClick={cerrarSesion}>
+          Cerrar Sesión
+        </button>
     </div>
   );
 
