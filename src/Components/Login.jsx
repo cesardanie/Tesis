@@ -47,8 +47,14 @@ const Login = () => {
         setModalIsOpen(true);
         setModalMessage('Inicio de sesión exitoso. ¡Bienvenido!');
         setIsSuccessModal(true);
-  
-        history.push('/Home');
+        if(response.Rol==='Administrador')
+        {
+          history.push('/Gerente')
+        }
+        if(response.Rol==='Empleado')
+        {
+          history.push('/Home');
+        }
         // Recargar la página
         window.location.reload();
       }
