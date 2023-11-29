@@ -3,11 +3,10 @@ import '../Estilos/LoginForm.css';
 import AuthService from '../Services/AuthService.js';
 import Modal from '../Components/ModalLogin'; // Ajusta la ruta según tu estructura de carpetas
 import { useHistory } from "react-router";
-
 import { Redirect } from 'react-router-dom';
 
 const Login = () => {
-  let history = useHistory ();
+  let history = useHistory();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loginSuccess, setLoginSuccess] = useState(false);
@@ -16,7 +15,6 @@ const Login = () => {
   const [isSuccessModal, setIsSuccessModal] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(null);
   const [userRole, setUserRole] = useState(null);
-
 
   const closeModal = () => {
     setModalIsOpen(false);
@@ -27,12 +25,19 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
+      // Validaciones adicionales
+      if (!username || !password) {
+        // Si el nombre de usuario o la contraseña están en blanco, muestra un mensaje de error
+        window.alert("Por favor, completa todos los campos.");
+        return;
+      }
 
+      // Realizar la solicitud de inicio de sesión
       const response = await AuthService.login(username, password);
       console.log('Respuesta del servidor:', response);
-      
+
       const { token, role } = response;
-      localStorage.setItem('token',response.token);
+      localStorage.setItem('token', response.token);
       localStorage.setItem('role', response.role);
       localStorage.setItem('id', response.id);
       localStorage.setItem('estado', response.estado);
@@ -41,25 +46,24 @@ const Login = () => {
       setModalIsOpen(true);
       setModalMessage('Inicio de sesión exitoso. ¡Bienvenido!');
       setIsSuccessModal(true);
-  
+
       // Restablecer los campos
       setUsername('');
       setPassword('');
       history.push('/Home');
-     // Recargar la página
+      // Recargar la página
       window.location.reload();
 
     } catch (error) {
       window.alert("Error credenciales inválidas");
       console.error('Error al iniciar sesión:', error.message);
-  
+
       // Mostrar modal de error
       setModalIsOpen(true);
       setModalMessage('Error al iniciar sesión. Credenciales inválidas.');
       setIsSuccessModal(false);
     }
   };
-
 
   return (
     <div className="login-container">
@@ -72,6 +76,7 @@ const Login = () => {
           placeholder="Usuario"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+          required
         />
         <input
           className="login-input"
@@ -79,6 +84,7 @@ const Login = () => {
           placeholder="Contraseña"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          required
         />
         <button className="login-button" onClick={handleLogin}>
           Iniciar Sesión
