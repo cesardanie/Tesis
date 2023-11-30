@@ -12,6 +12,8 @@ import Certificadolaboral from './Components/Certificadolaboral';
 import HomeGerente from '../src/Components/HomeGerente';
 import CuentaBanco from './Components/CuentaBanco';
 import TablaDatosGerente from './Components/TablaDatosGerente';
+import TablaUsuarios from './Components/TablaUsuarios';
+import PrivateRoute from './Components/PrivateRoute';
 function App() {
 
 
@@ -20,15 +22,16 @@ function App() {
     <Router>
       <Layout>
       <Switch>
-        <Route path ='/TablaDatosGerente' component={TablaDatosGerente}/>
-        <Route path ='/CuentaBanco' component={CuentaBanco}/>
-        <Route path ='/Gerente' component={HomeGerente}/>
-        <Route path ='/CertificadoLaboral' component={Certificadolaboral}/>
-        <Route path ='/PagodeNomina' component={PagodeNomina}/>
-        <Route path="/Certificados"  component={Certificados} />
-        <Route path="/Calendario"  component={CalendarModule} />
-        <Route path="/modallogin" exact component={ModalLogin} />
-        <Route path="/Home"  component={Home} />
+        <PrivateRoute path="/TabladeUsuarios" component={TablaUsuarios} roles={['Administrador']} />
+        <PrivateRoute path="/TablaDatosGerente" component={TablaDatosGerente} roles={['Administrador']} />
+        <PrivateRoute path="/CuentaBanco" component={CuentaBanco} roles={['Administrador']} />
+        <PrivateRoute path="/Gerente" component={HomeGerente} roles={['Administrador']} />
+        <PrivateRoute path="/CertificadoLaboral" component={Certificadolaboral} roles={['Administrador']} />
+        <PrivateRoute path="/PagodeNomina" component={PagodeNomina} roles={['Administrador']} />
+        <PrivateRoute path="/Certificados" component={Certificados} roles={['Administrador']} />
+        <PrivateRoute path="/Calendario" component={CalendarModule} roles={['Administrador']} />
+        <PrivateRoute path="/modallogin" exact component={ModalLogin} roles={['Administrador']}/>
+        <PrivateRoute path="/Home"  component={Home} roles={['Empleado']}/>
         <Route path="/" exact component={Login}/>
         <Route path="*" component={NotFound} />
       </Switch>
