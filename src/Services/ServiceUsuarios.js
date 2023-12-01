@@ -34,7 +34,28 @@ const ServiceUsuarios = {
     }catch (error) {
         throw new Error('Error al obtener usuarios');
       }
+  },
+  AgregarUsuario: async (nuevoUsuario) => {
+    try {
+      const sessionString = localStorage.getItem('session');
+      const sessionObject = JSON.parse(sessionString);
+      const token = sessionObject.token;
+      const response = await axios.post(
+        'http://localhost:3023/add/AgregarUsuarios',
+        nuevoUsuario, // Pasa los datos del nuevo usuario como el cuerpo de la solicitud
+        {
+          headers: {
+            'authorization': `${token}`,
+          },
+        }
+      );
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      throw new Error('Error al agregar usuario');
+    }
   }
+  
 };
 
 export default ServiceUsuarios;

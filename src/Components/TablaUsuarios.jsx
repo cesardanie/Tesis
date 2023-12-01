@@ -9,9 +9,10 @@ const TablaUsuarios = () => {
     let history = useHistory();
   const [usuarios, setUsuarios] = useState([]);
   const [nuevoUsuario, setNuevoUsuario] = useState({
-    correoUsuario: '',
-    contrasena: '',
-    rol: 'empleado',
+    id:'',
+    Correo: '',
+    Contrasena: '',
+    Rol: 'Empleado',
   });
   const [reloadTable, setReloadTable] = useState(false);
 
@@ -29,14 +30,33 @@ const TablaUsuarios = () => {
     window.location.reload();
   }
 
-  const agregarUsuario = () => {
-    setUsuarios((prevUsuarios) => [...prevUsuarios, nuevoUsuario]);
-    setNuevoUsuario({
-        id:'',
+  const agregarUsuario = async () => {
+    try {
+      // Llama a la función setUsuarios para actualizar el estado localmente
+      setUsuarios((prevUsuarios) => [...prevUsuarios, nuevoUsuario]);
+  
+      // Llama al servicio para enviar los datos a la API
+      const response =await ServiceUsuarios.AgregarUsuario(nuevoUsuario);
+      console.log(response);
+      // Reinicia el estado de nuevoUsuario después de agregarlo
+      setNuevoUsuario({
+        id: '',
         Correo: '',
         Contrasena: '',
-        Rol: 'empleado',
-    });
+        Rol: '',
+      });
+      if(response.Estado===false)
+      {
+        window.alert("El Usuario ya existe y no se puede agregar");
+      }
+      if(response.Estado===true){
+          window.alert("Usuario Agregado con exito");
+      }
+      window.location.reload();
+    } catch (error) {
+      // Maneja el error aquí si es necesario
+      console.error('Error al agregar usuario:', error);
+    }
   };
   const eliminarUsuario = async (id) => {
     try {
@@ -111,8 +131,8 @@ const TablaUsuarios = () => {
           Correo o Usuario:
           <input
             type="text"
-            name="correoUsuario"
-            value={nuevoUsuario.correoUsuario}
+            name="Correo"
+            value={nuevoUsuario.Correo}
             onChange={handleInputChange}
           />
         </label>
@@ -120,20 +140,20 @@ const TablaUsuarios = () => {
           Contraseña:
           <input
             type="password"
-            name="contrasena"
-            value={nuevoUsuario.contrasena}
+            name="Contrasena"
+            value={nuevoUsuario.Contrasena}
             onChange={handleInputChange}
           />
         </label>
         <label>
           Rol:
           <select
-            name="rol"
-            value={nuevoUsuario.rol}
+            name="Rol"
+            value={nuevoUsuario.Rol}
             onChange={handleInputChange}
           >
-            <option value="empleado">Empleado</option>
-            <option value="administrador">Administrador</option>
+            <option value="Empleado">Empleado</option>
+            <option value="Administrador">Administrador</option>
           </select>
         </label>
         <br/>
