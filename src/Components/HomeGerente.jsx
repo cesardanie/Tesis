@@ -1,13 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import { useHistory } from "react-router";
 import '../Estilos/HomeGerenteStyless.css';
+import SessionService from '../Services/SessionService';
 
-var Rol = localStorage.getItem('role');
-var token = localStorage.getItem('token');
-var estado=localStorage.getItem('estado')
 const HomeGerente = () => {
   let history = useHistory();
 
+  const [sessionData, setSessionData] = useState(null);
+
+  useEffect(() => {
+    const storedSession = SessionService.getSession();
+    setSessionData(storedSession);
+    console.log('SessionData:', storedSession);
+    console.log('useEffect se ejecutó');
+  }, []);
   const redireccionarDias = () => {
     history.push('/Calendario');
     window.location.reload();
@@ -24,16 +30,14 @@ const HomeGerente = () => {
   }
   const cerrarSesion = () => {
     // Eliminar datos de la sesión al hacer clic en cerrar sesión
-    localStorage.removeItem('role');
-    localStorage.removeItem('token');
-    localStorage.removeItem('estado');
-  
+    SessionService.clearSession();
     // Redirigir a la página de inicio de sesión u otra página
     history.push('/');
     window.location.reload();
+
   }
-if((Rol==='Administrador') &&(token!=undefined)&&(estado==='true'))
-{
+
+
   return (
     <div className="home-container">
       <h1>Bienvenido al Menú principal</h1>
@@ -90,15 +94,5 @@ if((Rol==='Administrador') &&(token!=undefined)&&(estado==='true'))
   );
 
 }
-else{
-  return (
-    <div className="home-container">
-      <h1>No tienes permisos de administrador.</h1>
-      {/* Puedes agregar más contenido o redireccionar a otra página */}
-    </div>
-  );
-}
-
-};
 
 export default HomeGerente;

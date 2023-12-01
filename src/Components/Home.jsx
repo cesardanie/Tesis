@@ -1,11 +1,8 @@
 import React, { useEffect } from 'react';
 import '../Estilos/Home.css';
 import { useHistory } from "react-router";
+import SessionService from '../Services/SessionService';
 
-
-var Rol = localStorage.getItem('role');
-var token = localStorage.getItem('token');
-var estado=localStorage.getItem('estado')
 
 const Home = () => {
   let history = useHistory ();
@@ -32,16 +29,12 @@ const redireccionarCuentaBancaria=()=>{
 }
 const cerrarSesion = () => {
   // Eliminar datos de la sesión al hacer clic en cerrar sesión
-  localStorage.removeItem('role');
-  localStorage.removeItem('token');
-  localStorage.removeItem('estado');
-
+  SessionService.clearSession();
   // Redirigir a la página de inicio de sesión u otra página
   history.push('/');
   window.location.reload();
 }
-if((Rol==='Empleado') &&(token!=undefined)&&(estado==='true'))
-{
+
   return (
     <div className="home-container">
       <h1>Bienvenido al Menú principal</h1>
@@ -90,14 +83,7 @@ if((Rol==='Empleado') &&(token!=undefined)&&(estado==='true'))
     </div>
   );
 }
-else{
-  return (
-    <div className="home-container">
-      <h1>No tienes permisos suficientes</h1>
-      {/* Puedes agregar más contenido o redireccionar a otra página */}
-    </div>
-  );
-}
-};
+
+
 
 export default Home;

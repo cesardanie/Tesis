@@ -4,6 +4,7 @@ import AuthService from '../Services/AuthService.js';
 import Modal from '../Components/ModalLogin'; // Ajusta la ruta según tu estructura de carpetas
 import { useHistory } from "react-router";
 import { Redirect } from 'react-router-dom';
+import SessionService from '../Services/SessionService.js';
 
 const Login = () => {
   let history = useHistory();
@@ -38,18 +39,18 @@ const Login = () => {
       if(response.estado==='true'){
         console.log("positivo")
         const { token, role } = response;
-        localStorage.setItem('token', response.token);
-        localStorage.setItem('role', response.Rol);
-        localStorage.setItem('id', response.id);
-        localStorage.setItem('estado', response.estado);
-        // Mostrar modal de éxito y redirigir a la página de inicio
-        setLoginSuccess(true);
-        setModalIsOpen(true);
-        setModalMessage('Inicio de sesión exitoso. ¡Bienvenido!');
-        setIsSuccessModal(true);
+           // Utilizar SessionService para guardar datos de sesión
+        SessionService.saveSession({
+          token: response.token,
+          role: response.Rol,
+          id: response.id,
+          estado: response.estado,
+        });
         if(response.Rol==='Administrador')
         {
+          console.log("entro")
           history.push('/Gerente')
+          console.log(history.location.pathname)
         }
         if(response.Rol==='Empleado')
         {
@@ -60,12 +61,10 @@ const Login = () => {
       }
       if(response.estado==='false')
       {
+       // Utilizar SessionService para eliminar datos de sesión
+        SessionService.clearSession();
         console.log("negativo")
         window.alert("credenciales inválidas");
-        // Mostrar modal de error
-        setModalIsOpen(true);
-        setModalMessage('Error al iniciar sesión. Credenciales inválidas.');
-        setIsSuccessModal(false);
                 // Restablecer los campos
                 setUsername('');
                 setPassword('');
@@ -76,7 +75,7 @@ const Login = () => {
     } catch (error) {
       window.alert("Error credenciales inválidas");
       console.error('Error al iniciar sesión:', error.message);
-
+      SessionService.clearSession();
       // Mostrar modal de error
       setModalIsOpen(true);
       setModalMessage('Error al iniciar sesión. Credenciales inválidas.');
