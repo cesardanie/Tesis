@@ -2,6 +2,8 @@ import React, { useState,useEffect } from 'react';
 import '../Estilos/TabladeUsuariosestilo.css';
 import { useHistory } from "react-router";
 import ServiceUsuarios from '../Services/ServiceUsuarios';
+import AuthServiceToken from '../Services/AuthServiceToken';
+import SessionService from '../Services/SessionService';
 
 const TablaUsuarios = () => {
     let history = useHistory();
@@ -50,6 +52,12 @@ const TablaUsuarios = () => {
   };
     // Agrega un efecto para cargar los usuarios al montar el componente
     useEffect(() => {
+      // Verificar si el token es válido al cargar el componente
+      if (!AuthServiceToken.isLoggedIn()) {
+        SessionService.clearSession();
+        // Redirigir al menú principal si el token no es válido
+        history.push('/'); // Ajusta la ruta según la estructura de tus rutas
+      } else {
         const cargarUsuarios = async () => {
           try {
             const usuariosData = await ServiceUsuarios.ObtenerUsuarios();
@@ -58,9 +66,10 @@ const TablaUsuarios = () => {
             console.error('Error al cargar usuarios:', error.message);
           }
         };
-    
+  
         cargarUsuarios();
-      }, [reloadTable]); // El segundo argumento es un array de dependencias, en este caso, está vacío, lo que significa que se ejecutará una vez al montar el componente.
+      }
+    }, [reloadTable, history]); // El segundo argumento es un array de dependencias, en este caso, está vacío, lo que significa que se ejecutará una vez al montar el componente.
     
 
   return (
@@ -76,17 +85,23 @@ const TablaUsuarios = () => {
           </tr>
         </thead>
         <tbody>
-          {usuarios.map((usuario, index) => (
+        {usuarios && usuarios.length > 0 ? (
+          usuarios.map((usuario, index) => (
             <tr key={index}>
-            <td>{usuario.id}</td>
+              <td>{usuario.id}</td>
               <td>{usuario.Correo}</td>
               <td>{usuario.Contrasena}</td>
               <td>{usuario.Rol}</td>
               <td>
-              <button onClick={() => eliminarUsuario(usuario.id)}>Eliminar</button>
-            </td>
+                <button onClick={() => eliminarUsuario(usuario.id)}>Eliminar</button>
+              </td>
             </tr>
-          ))}
+          ))
+        ) : (
+          <tr>
+            <td colSpan="4">No hay usuarios disponibles</td>
+          </tr>
+        )}
         </tbody>
       </table>
 
