@@ -28,6 +28,11 @@ const HomeGerente = () => {
     history.push('/PagodeNomina');
     window.location.reload();
   }
+  const RedireccionarTabladeUsuarios=()=>
+  {
+    history.push('/TabladeUsuarios');
+    window.location.reload();
+  }
   const cerrarSesion = () => {
     // Eliminar datos de la sesión al hacer clic en cerrar sesión
     SessionService.clearSession();
@@ -81,7 +86,7 @@ const HomeGerente = () => {
         <div className="option">
           <h2>Agregar Empleados</h2>
            <p>En este modulo se podra gregar empleados nuevos y eliminar usuarios que ya no trabajen en la empresa </p>
-          <button className="button option">
+           <button className="button option" onClick={RedireccionarTabladeUsuarios}>
             Ingresar
           </button>
         </div>

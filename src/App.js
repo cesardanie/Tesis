@@ -26,10 +26,10 @@ function App() {
         <PrivateRoute path="/TablaDatosGerente" component={TablaDatosGerente} roles={['Administrador']} />
         <PrivateRoute path="/CuentaBanco" component={CuentaBanco} roles={['Administrador']} />
         <PrivateRoute path="/Gerente" component={HomeGerente} roles={['Administrador']} />
-        <PrivateRoute path="/CertificadoLaboral" component={Certificadolaboral} roles={['Administrador']} />
-        <PrivateRoute path="/PagodeNomina" component={PagodeNomina} roles={['Administrador']} />
-        <PrivateRoute path="/Certificados" component={Certificados} roles={['Administrador']} />
-        <PrivateRoute path="/Calendario" component={CalendarModule} roles={['Administrador']} />
+        <PrivateRoute path="/CertificadoLaboral" component={Certificadolaboral} roles={['Empleado']} />
+        <PrivateRoute path="/PagodeNomina" component={PagodeNomina} roles={['Empleado']} />
+        <PrivateRoute path="/Certificados" component={Certificados} roles={['Empleado']} />
+        <PrivateRoute path="/Calendario" component={CalendarModule} roles={['Empleado']} />
         <PrivateRoute path="/modallogin" exact component={ModalLogin} roles={['Administrador']}/>
         <PrivateRoute path="/Home"  component={Home} roles={['Empleado']}/>
         <Route path="/" exact component={Login}/>

@@ -1,12 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
+import '../Estilos/TabladeUsuariosestilo.css';
+import { useHistory } from "react-router";
+import ServiceUsuarios from '../Services/ServiceUsuarios';
 
 const TablaUsuarios = () => {
+    let history = useHistory();
   const [usuarios, setUsuarios] = useState([]);
   const [nuevoUsuario, setNuevoUsuario] = useState({
     correoUsuario: '',
     contrasena: '',
     rol: 'empleado',
   });
+  const [reloadTable, setReloadTable] = useState(false);
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -15,15 +21,47 @@ const TablaUsuarios = () => {
       [name]: value,
     }));
   };
+  const RedireccionarTabladeUsuarios=()=>
+  {
+    history.push('/Gerente');
+    window.location.reload();
+  }
 
   const agregarUsuario = () => {
     setUsuarios((prevUsuarios) => [...prevUsuarios, nuevoUsuario]);
     setNuevoUsuario({
-      correoUsuario: '',
-      contrasena: '',
-      rol: 'empleado',
+        id:'',
+        Correo: '',
+        Contrasena: '',
+        Rol: 'empleado',
     });
   };
+  const eliminarUsuario = async (id) => {
+    try {
+    
+      const usuariosData = await ServiceUsuarios.Eliminar(id);
+        console.log(usuariosData);
+        if (usuariosData.Estado === true) {
+            setReloadTable(!reloadTable); // Cambiar el estado para recargar la tabla
+          }
+    } catch (error) {
+      console.error('Error al eliminar usuario:', error.message);
+    }
+  };
+    // Agrega un efecto para cargar los usuarios al montar el componente
+    useEffect(() => {
+        const cargarUsuarios = async () => {
+          try {
+            const usuariosData = await ServiceUsuarios.ObtenerUsuarios();
+            setUsuarios(usuariosData.data);
+          } catch (error) {
+            console.error('Error al cargar usuarios:', error.message);
+          }
+        };
+    
+        cargarUsuarios();
+      }, [reloadTable]); // El segundo argumento es un array de dependencias, en este caso, está vacío, lo que significa que se ejecutará una vez al montar el componente.
+    
 
   return (
     <div>
@@ -31,6 +69,7 @@ const TablaUsuarios = () => {
       <table>
         <thead>
           <tr>
+            <th>id</th>
             <th>Correo o Usuario</th>
             <th>Contraseña</th>
             <th>Rol</th>
@@ -39,9 +78,13 @@ const TablaUsuarios = () => {
         <tbody>
           {usuarios.map((usuario, index) => (
             <tr key={index}>
-              <td>{usuario.correoUsuario}</td>
-              <td>{usuario.contrasena}</td>
-              <td>{usuario.rol}</td>
+            <td>{usuario.id}</td>
+              <td>{usuario.Correo}</td>
+              <td>{usuario.Contrasena}</td>
+              <td>{usuario.Rol}</td>
+              <td>
+              <button onClick={() => eliminarUsuario(usuario.id)}>Eliminar</button>
+            </td>
             </tr>
           ))}
         </tbody>
@@ -78,7 +121,13 @@ const TablaUsuarios = () => {
             <option value="administrador">Administrador</option>
           </select>
         </label>
+        <br/>
         <button onClick={agregarUsuario}>Agregar Usuario</button>
+        <br/>
+        <br/>
+        <button onClick={RedireccionarTabladeUsuarios}>Menu Principal</button>
+        <br/>
+        <br/>
       </div>
     </div>
   );
