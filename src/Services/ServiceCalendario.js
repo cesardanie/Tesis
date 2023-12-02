@@ -18,5 +18,21 @@ const ServiceCalendario = {
       throw new Error('Error al cargar días en el calendario');
     }
   },
+  ExtraerDias: async () => {
+    try {
+      const sessionString = localStorage.getItem('session');
+      const sessionObject = JSON.parse(sessionString);
+      const token = sessionObject.token;
+      const response = await axios.get('http://localhost:3023/apidos/ObtenerDias',{
+          headers: {
+              'authorization': `${token}`,
+            }
+      });
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      throw new Error('Error al obtener usuarios');
+    } 
+  }
 };
 export default ServiceCalendario;

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import DateRangePicker from './DateRangePicker';
 import ServiceCalendario from '../Services/ServiceCalendario';
 import { useHistory } from "react-router";
+import DataTable from './DataTable';
+import '../Estilos/CalendarStyles.css';
 
 const CalendarModule = () => {
   let history = useHistory();
@@ -47,7 +49,7 @@ const CalendarModule = () => {
   };
 
   return (
-    <div className="calendar-container">
+    <div className="larger-calendar-container">
       <h1>Seleccionar un rango de fechas</h1>
       <form onSubmit={handleFormSubmit} className="form">
         <div className="form-group">
@@ -77,6 +79,9 @@ const CalendarModule = () => {
           Enviar Formulario
         </button>
       </form>
+      
+      {/* Renderiza la tabla aquí, después del formulario */}
+      <DataTable />
     </div>
   );
 };

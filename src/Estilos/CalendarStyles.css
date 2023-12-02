@@ -34,3 +34,8 @@ textarea {
 .submit-button:hover {
   background-color: #00537e;
 }
+.larger-calendar-container {
+  width: 80%; /* O cualquier valor que desees */
+  margin: 0 auto; /* Centra el contenedor horizontalmente */
+  /* Agrega otros estilos según tus necesidades */
+}
