@@ -16,12 +16,13 @@ const ServiceGestionDiasGerente = {
       throw new Error('Error al cargar días en el calendario');
     }
   },
-  ActualizarEstado:async (data)=> {
+  ActualizarEstado:async (Estado,id)=> {
     try {
       const sessionString = localStorage.getItem('session');
       const sessionObject = JSON.parse(sessionString);
       const token = sessionObject.token;
-      const response = await axios.post('http://localhost:3023/apitres/updateAdmiDias',data ,// Pasa los datos del nuevo usuario como el cuerpo de la solicitud
+      console.log(Estado)
+      const response = await axios.post('http://localhost:3023/apitres/updateAdmiDias',{Estado,id} ,// Pasa los datos del nuevo usuario como el cuerpo de la solicitud
       {
         headers: {
           'authorization': `${token}`,
