@@ -14,6 +14,7 @@ import CuentaBanco from './Components/CuentaBanco';
 import TablaDatosGerente from './Components/TablaDatosGerente';
 import TablaUsuarios from './Components/TablaUsuarios';
 import PrivateRoute from './Components/PrivateRoute';
+import GestionarDiasAdmi from './Components/GestionarDiasAdmi';
 function App() {
 
 
@@ -32,6 +33,7 @@ function App() {
         <PrivateRoute path="/Calendario" component={CalendarModule} roles={['Empleado']} />
         <PrivateRoute path="/modallogin" exact component={ModalLogin} roles={['Administrador']}/>
         <PrivateRoute path="/Home"  component={Home} roles={['Empleado']}/>
+        <PrivateRoute path="/GerenteDias"  component={GestionarDiasAdmi} roles={['Administrador']}/>
         <Route path="/" exact component={Login}/>
         <Route path="*" component={NotFound} />
       </Switch>

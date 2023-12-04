@@ -79,8 +79,6 @@ const CalendarModule = () => {
           Enviar Formulario
         </button>
       </form>
-      
-      {/* Renderiza la tabla aquí, después del formulario */}
       <DataTable />
     </div>
   );

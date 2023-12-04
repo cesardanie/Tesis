@@ -7,7 +7,10 @@ const DataTable = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await ServiceCalendario.ExtraerDias();
+        const sessionString = localStorage.getItem('session');
+        const sessionObject = JSON.parse(sessionString);
+        const id=sessionObject.id;
+        const response = await ServiceCalendario.ExtraerDias(id);
         console.log(response);
         setDias(response.data);
       } catch (error) {

@@ -18,20 +18,21 @@ const ServiceCalendario = {
       throw new Error('Error al cargar días en el calendario');
     }
   },
-  ExtraerDias: async () => {
+  ExtraerDias: async (id) => {
     try {
       const sessionString = localStorage.getItem('session');
       const sessionObject = JSON.parse(sessionString);
       const token = sessionObject.token;
-      const response = await axios.get('http://localhost:3023/apidos/ObtenerDias',{
+      console.log("paso por aqui", id, token)
+      const response = await axios.post('http://localhost:3023/apidos/ObtenerDias', { id },{
           headers: {
               'authorization': `${token}`,
             }
       });
-      console.log(response.data);
+      console.log(response);
       return response.data;
     } catch (error) {
-      throw new Error('Error al obtener usuarios');
+      throw new Error('Error al obtener dias');
     } 
   }
 };

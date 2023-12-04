@@ -15,7 +15,7 @@ const HomeGerente = () => {
     console.log('useEffect se ejecutó');
   }, []);
   const redireccionarDias = () => {
-    history.push('/Calendario');
+    history.push('/GerenteDias');
     window.location.reload();
   }
 
