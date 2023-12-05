@@ -37,6 +37,7 @@ const ServiceUsuarios = {
   },
   AgregarUsuario: async (nuevoUsuario) => {
     try {
+      console.log("DATO NUEVO",nuevoUsuario);
       const sessionString = localStorage.getItem('session');
       const sessionObject = JSON.parse(sessionString);
       const token = sessionObject.token;

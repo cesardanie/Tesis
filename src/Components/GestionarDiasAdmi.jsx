@@ -37,6 +37,8 @@ const GestionarDiasAdmi = () => {
     try {
       const response = await GestionarDiasAdmiService.ActualizarEstado(Estado, id);
       console.log('Respuesta del servidor:', response);
+      window.alert("El estado se cambio exitosamente");
+      window.location.reload();
       setEstados((prevEstados) => ({ ...prevEstados, [id]: Estado }));
     } catch (error) {
       window.alert('Error credenciales inválidas');
