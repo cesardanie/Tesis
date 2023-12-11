@@ -50,10 +50,19 @@ const CuentaBancariaGerente = () => {
   const handleGuardarCuentaClick = async () => {
     try {
       // Lógica para guardar la cuenta utilizando el servicio
-      await ServiceCambiodeCuenta.CargarCuentaEdit(nuevaCuenta);
+      const respuesta=await ServiceCambiodeCuenta.InsertarDatos(nuevaCuenta);
+      console.log(respuesta);
+      if(respuesta.data.Estado===true)
+      {
+        window.alert("Se agrego correctamente la cuenta")
+        window.location.reload();
+      }else{
+        window.alert("No se pudo agregar")
+        window.location.reload();
+      }
       // Vuelve a cargar la lista de usuarios después de guardar
-      const data = await ServiceCambiodeCuenta.ExtraerCuentaTotal();
-      setUsuarios(data);
+      //const data = await ServiceCambiodeCuenta.ExtraerCuentaTotal();
+     // setUsuarios(data);
       // Limpia los estados después de guardar
       setUsuarioSeleccionado(null);
       setNuevaCuenta({
@@ -61,6 +70,7 @@ const CuentaBancariaGerente = () => {
         Cuenta: '',
         Banco: '',
       });
+      
     } catch (error) {
       console.error('Error al guardar cuenta:', error.message);
     }

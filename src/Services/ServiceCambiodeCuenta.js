@@ -52,12 +52,13 @@ const ServiceCambiodeCuenta = {
       throw new Error('Error al obtener dias');
     } 
   },
-  InsertarDatos:async () => {
+  InsertarDatos:async (data) => {
     try {
+      console.log(data)
       const sessionString = localStorage.getItem('session');
       const sessionObject = JSON.parse(sessionString);
       const token = sessionObject.token;
-      const response = await axios.get('http://localhost:3023/apicuatro/obtenerDatosCompletos',{
+      const response = await axios.post('http://localhost:3023/apicuatro/IngresarDatosdecuenta',{data},{
           headers: {
               'authorization': `${token}`,
             }
