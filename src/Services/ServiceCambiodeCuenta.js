@@ -41,9 +41,23 @@ const ServiceCambiodeCuenta = {
       const sessionString = localStorage.getItem('session');
       const sessionObject = JSON.parse(sessionString);
       const token = sessionObject.token;
-      const id = sessionObject.id;
-      console.log("paso por aqui", id, token)
-      const response = await axios.post('http://localhost:3023/apicuatro/OntenerCuenta', { id },{
+      const response = await axios.get('http://localhost:3023/apicuatro/obtenerDatosCompletos',{
+          headers: {
+              'authorization': `${token}`,
+            }
+      });
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      throw new Error('Error al obtener dias');
+    } 
+  },
+  InsertarDatos:async () => {
+    try {
+      const sessionString = localStorage.getItem('session');
+      const sessionObject = JSON.parse(sessionString);
+      const token = sessionObject.token;
+      const response = await axios.get('http://localhost:3023/apicuatro/obtenerDatosCompletos',{
           headers: {
               'authorization': `${token}`,
             }

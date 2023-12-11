@@ -1,54 +1,69 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { useHistory } from "react-router";
 import ServiceCambiodeCuenta from '../Services/ServiceCambiodeCuenta';
 
 const CuentaBancariaGerente = () => {
-    let history = useHistory();
-  const [usuarios, setUsuarios] = useState([
-    // Lista de usuarios (puedes obtenerla de tu API o definirla aquí)
-    { id: 1, Correo: 'usuario1@example.com', Contrasena: 'password1', Rol: 'Gerente', Nombre: 'Nombre1', Edad: 30, Puesto: 'Puesto1', Sueldo: 50000 },
-    // Otros usuarios...
-  ]);
-
+  let history = useHistory();
+  const [usuarios, setUsuarios] = useState([]);
   const [usuarioSeleccionado, setUsuarioSeleccionado] = useState(null);
   const [nuevaCuenta, setNuevaCuenta] = useState({
     id: '',
     Cuenta: '',
-    Banco: ''
+    Banco: '',
   });
+
+  useEffect(() => {
+    const cargarUsuarios = async () => {
+      try {
+        const data = await ServiceCambiodeCuenta.ExtraerCuentaTotal();
+        setUsuarios(data.Datos);
+      } catch (error) {
+        console.error('Error al cargar usuarios:', error.message);
+      }
+    };
+
+    cargarUsuarios();
+  }, []); // El segundo argumento [] asegura que se ejecute solo al montar el componente
 
   const handleAñadirCuentaClick = (usuario) => {
     setUsuarioSeleccionado(usuario);
     setNuevaCuenta({
       id: usuario.id,
       Cuenta: '',
-      Banco: ''
+      Banco: '',
     });
   };
-  const RedireccionarMenu=()=>
-  {
+
+  const RedireccionarMenu = () => {
     history.push('/Gerente');
     window.location.reload();
-  }
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setNuevaCuenta((prevCuenta) => ({
       ...prevCuenta,
-      [name]: value
+      [name]: value,
     }));
   };
 
-  const handleGuardarCuentaClick = () => {
-    // Lógica para guardar la cuenta (puedes utilizar tu servicio aquí)
-    console.log('Guardando cuenta:', nuevaCuenta);
-    // Limpia los estados después de guardar
-    setUsuarioSeleccionado(null);
-    setNuevaCuenta({
-      id: '',
-      Cuenta: '',
-      Banco: ''
-    });
+  const handleGuardarCuentaClick = async () => {
+    try {
+      // Lógica para guardar la cuenta utilizando el servicio
+      await ServiceCambiodeCuenta.CargarCuentaEdit(nuevaCuenta);
+      // Vuelve a cargar la lista de usuarios después de guardar
+      const data = await ServiceCambiodeCuenta.ExtraerCuentaTotal();
+      setUsuarios(data);
+      // Limpia los estados después de guardar
+      setUsuarioSeleccionado(null);
+      setNuevaCuenta({
+        id: '',
+        Cuenta: '',
+        Banco: '',
+      });
+    } catch (error) {
+      console.error('Error al guardar cuenta:', error.message);
+    }
   };
 
   return (
@@ -65,11 +80,13 @@ const CuentaBancariaGerente = () => {
             <th>Edad</th>
             <th>Puesto</th>
             <th>Sueldo</th>
+            <th>Banco</th>
+            <th>Cuenta</th>
             <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
-          {usuarios.map((usuario) => (
+          {usuarios?.map((usuario) => (
             <tr key={usuario.id}>
               <td>{usuario.id}</td>
               <td>{usuario.Correo}</td>
@@ -79,6 +96,8 @@ const CuentaBancariaGerente = () => {
               <td>{usuario.Edad}</td>
               <td>{usuario.Puesto}</td>
               <td>{usuario.Sueldo}</td>
+              <td>{usuario.Cuenta}</td>
+              <td>{usuario.Banco}</td>
               <td>
                 <button onClick={() => handleAñadirCuentaClick(usuario)}>Añadir Cuenta</button>
               </td>
