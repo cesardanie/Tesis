@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import { useHistory } from "react-router";
+import ServiceCambiodeCuenta from '../Services/ServiceCambiodeCuenta';
 
 const CuentaBancariaGerente = () => {
+    let history = useHistory();
   const [usuarios, setUsuarios] = useState([
     // Lista de usuarios (puedes obtenerla de tu API o definirla aquí)
     { id: 1, Correo: 'usuario1@example.com', Contrasena: 'password1', Rol: 'Gerente', Nombre: 'Nombre1', Edad: 30, Puesto: 'Puesto1', Sueldo: 50000 },
@@ -22,6 +25,11 @@ const CuentaBancariaGerente = () => {
       Banco: ''
     });
   };
+  const RedireccionarMenu=()=>
+  {
+    history.push('/Gerente');
+    window.location.reload();
+  }
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -102,6 +110,11 @@ const CuentaBancariaGerente = () => {
           </form>
         </div>
       )}
+      <br />
+      <br />
+      <button type="button" onClick={RedireccionarMenu}>Menu Principal</button>
+      <br />
+      <br />
     </div>
   );
 };

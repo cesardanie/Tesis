@@ -11,8 +11,6 @@ const HomeGerente = () => {
   useEffect(() => {
     const storedSession = SessionService.getSession();
     setSessionData(storedSession);
-    console.log('SessionData:', storedSession);
-    console.log('useEffect se ejecutó');
   }, []);
   const redireccionarDias = () => {
     history.push('/GerenteDias');
@@ -31,6 +29,11 @@ const HomeGerente = () => {
   const RedireccionarTabladeUsuarios=()=>
   {
     history.push('/TabladeUsuarios');
+    window.location.reload();
+  }
+  const RedireccionarTabladeCuentaBancaria=()=>
+  {
+    history.push('/CuentaBancariaGerente');
     window.location.reload();
   }
   const cerrarSesion = () => {
@@ -79,7 +82,7 @@ const HomeGerente = () => {
         <div className="option">
           <h2>Cambio de cuenta bancaria</h2>
           <p>el cambio de la cuenta bancaria a otro banco</p>
-          <button className="button option">
+          <button className="button option" onClick={RedireccionarTabladeCuentaBancaria}>
             cambio de cuenta
           </button>
         </div>
