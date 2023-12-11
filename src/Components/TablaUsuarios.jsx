@@ -46,7 +46,7 @@ const TablaUsuarios = () => {
       console.log(nuevoUsuario);
       // Llama al servicio para enviar todos los datos del nuevo usuario a la API
       const response = await ServiceUsuarios.AgregarUsuario(nuevoUsuario);
-      const estado = response.Estado.Estado;
+      const estado = response.Estado;
       console.log(response);
   
       // Si el usuario se agregó exitosamente, recarga la lista de usuarios

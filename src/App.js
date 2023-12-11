@@ -15,6 +15,7 @@ import TablaDatosGerente from './Components/TablaDatosGerente';
 import TablaUsuarios from './Components/TablaUsuarios';
 import PrivateRoute from './Components/PrivateRoute';
 import GestionarDiasAdmi from './Components/GestionarDiasAdmi';
+import CuentaBancariaGerente from './Components/CuentaBancariaGerente';
 function App() {
 
 
@@ -25,13 +26,14 @@ function App() {
       <Switch>
         <PrivateRoute path="/TabladeUsuarios" component={TablaUsuarios} roles={['Administrador']} />
         <PrivateRoute path="/TablaDatosGerente" component={TablaDatosGerente} roles={['Administrador']} />
-        <PrivateRoute path="/CuentaBanco" component={CuentaBanco} roles={['Administrador']} />
+        <PrivateRoute path="/CuentaBanco" component={CuentaBanco} roles={['Empleado']} />
         <PrivateRoute path="/Gerente" component={HomeGerente} roles={['Administrador']} />
         <PrivateRoute path="/CertificadoLaboral" component={Certificadolaboral} roles={['Empleado']} />
         <PrivateRoute path="/PagodeNomina" component={PagodeNomina} roles={['Empleado']} />
         <PrivateRoute path="/Certificados" component={Certificados} roles={['Empleado']} />
         <PrivateRoute path="/Calendario" component={CalendarModule} roles={['Empleado']} />
         <PrivateRoute path="/modallogin" exact component={ModalLogin} roles={['Administrador']}/>
+        <PrivateRoute path="/CuentaBancariaGerente" exact component={CuentaBancariaGerente} roles={['Administrador']}/>
         <PrivateRoute path="/Home"  component={Home} roles={['Empleado']}/>
         <PrivateRoute path="/GerenteDias"  component={GestionarDiasAdmi} roles={['Administrador']}/>
         <Route path="/" exact component={Login}/>
