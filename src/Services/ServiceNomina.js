@@ -41,7 +41,7 @@ const ServiceNomina = {
         const sessionObject = JSON.parse(sessionString);
         const token = sessionObject.token;
         const id=sessionObject.id
-        const response = await axios.post('http://localhost:3023/apicinco/AgregarPagos',{id:id},{
+        const response = await axios.post('http://localhost:3023/apicinco/ExtraerDatosNominaCliente',{id:id},{
             headers: {
                 'authorization': `${token}`,
               }
