@@ -47,7 +47,10 @@ const CalendarModule = () => {
   
     console.log('Datos enviados:', data);
   };
-
+  const RedireccionarMenu = () => {
+    history.push('/Home');
+    window.location.reload();
+  };
   return (
     <div className="larger-calendar-container">
       <h1>Seleccionar un rango de fechas</h1>
@@ -80,6 +83,11 @@ const CalendarModule = () => {
         </button>
       </form>
       <DataTable />
+      <br />
+      <br />
+      <button type="button" onClick={RedireccionarMenu}>Menu Principal</button>
+      <br />
+      <br />
     </div>
   );
 };

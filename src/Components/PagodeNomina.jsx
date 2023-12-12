@@ -1,38 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import '../Estilos/TablaStyles.css';
+import ServiceNomina from '../Services/ServiceNomina';
 
-const App = () => {
-  const [users, setUsers] = useState([]);
+const PagodeNomina = () => {
+  const [datosCliente, setDatosCliente] = useState([]);
 
   useEffect(() => {
-    // Realiza una solicitud a la API para obtener los datos de los usuarios
-    fetch('https://api-ejemplo.com/users')
-      .then((response) => response.json())
+    ServiceNomina.ObtenerDatosCliente()
       .then((data) => {
-        setUsers(data); // Almacena los datos de los usuarios en el estado
+        setDatosCliente(data); // Actualiza el estado con los datos obtenidos
       })
       .catch((error) => {
-        console.error('Error al obtener datos de la API', error);
+        console.error('Error al obtener datos del cliente:', error.message);
       });
-  }, []);
+  }, []); // El segundo parámetro asegura que useEffect solo se ejecute una vez al montar el componente
 
   return (
     <div>
-      <h1>Tabla de Usuarios</h1>
+      <h2>Tabla de Datos del Cliente</h2>
       <table>
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Email</th>
+            <th>Mes</th>
+            <th>Estado</th>
           </tr>
         </thead>
         <tbody>
-          {users.map((user) => (
-            <tr key={user.id}>
-              <td>{user.id}</td>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
+          {datosCliente.map((dato, index) => (
+            <tr key={index}>
+              <td>{dato.Mes}</td>
+              <td>{dato.Estado}</td>
             </tr>
           ))}
         </tbody>
@@ -41,4 +38,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default PagodeNomina;

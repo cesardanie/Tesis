@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Mes from '../Components/Componente/Mes';
 import ServiceNomina from '../Services/ServiceNomina';
+import { useHistory } from "react-router";
 
 const mesesDelAno = [
   'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
@@ -9,6 +10,7 @@ const mesesDelAno = [
 ];
 
 const ModuloPagoNominaGerente = () => {
+    let history = useHistory();
   const [usuarios, setUsuarios] = useState([]);
   const [mesSeleccionado, setMesSeleccionado] = useState('');
   const [estadoPago, setEstadoPago] = useState(''); // Pago, Pendiente, En proceso
@@ -36,6 +38,10 @@ const ModuloPagoNominaGerente = () => {
       } catch (error) {
         console.error('Error al realizar el pago:', error.message);
       }
+  };
+  const RedireccionarMenu = () => {
+    history.push('/Gerente');
+    window.location.reload();
   };
 
   return (
@@ -133,6 +139,11 @@ const ModuloPagoNominaGerente = () => {
           ))}
         </tbody>
       </table>
+      <br />
+      <br />
+      <button type="button" onClick={RedireccionarMenu}>Menu Principal</button>
+      <br />
+      <br />
     </div>
   );
 };

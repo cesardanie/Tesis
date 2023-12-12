@@ -60,10 +60,6 @@ const CuentaBancariaGerente = () => {
         window.alert("No se pudo agregar")
         window.location.reload();
       }
-      // Vuelve a cargar la lista de usuarios después de guardar
-      //const data = await ServiceCambiodeCuenta.ExtraerCuentaTotal();
-     // setUsuarios(data);
-      // Limpia los estados después de guardar
       setUsuarioSeleccionado(null);
       setNuevaCuenta({
         id: '',

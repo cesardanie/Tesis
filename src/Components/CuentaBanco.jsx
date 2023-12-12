@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import '../Estilos/cuenta-banco.css';
 import ServiceCambiodeCuenta from '../Services/ServiceCambiodeCuenta';
+import { useHistory } from "react-router";
 
 function CuentaBanco() {
+  let history = useHistory();
   const [cuenta, setCuenta] = useState('');
   const [banco, setBanco] = useState('');
   const [editMode, setEditMode] = useState(false);
@@ -42,6 +44,10 @@ function CuentaBanco() {
 
   const handleEditClick = () => {
     setEditMode(true);
+  };
+  const RedireccionarMenu = () => {
+    history.push('/Home');
+    window.location.reload();
   };
 
   const handleSaveClick = async () => {
@@ -104,6 +110,10 @@ function CuentaBanco() {
       ) : (
         <button onClick={handleEditClick}>Editar</button>
       )}
+
+      <button type="button" onClick={RedireccionarMenu}>Menu Principal</button>
+      <br />
+      <br />
     </div>
   );
 }
