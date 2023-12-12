@@ -18,7 +18,7 @@ const HomeGerente = () => {
   }
 
   const redireccionarCertificados = () => {
-    history.push('/Certificados');
+    history.push('/ModuloGerenteCertificado');
     window.location.reload();
   }
 

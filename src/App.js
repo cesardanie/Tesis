@@ -17,6 +17,8 @@ import PrivateRoute from './Components/PrivateRoute';
 import GestionarDiasAdmi from './Components/GestionarDiasAdmi';
 import CuentaBancariaGerente from './Components/CuentaBancariaGerente';
 import ModuloPagoNominaGerente from './Components/ModuloPagoNominaGerente';
+import Firma from '../src/Components/Componente/Firma';
+import HomeGerenteCertificados from './Components/HomeGerenteCertificados';
 function App() {
 
 
@@ -27,6 +29,7 @@ function App() {
       <Switch>
         <PrivateRoute path="/ModulodepagodenominaGerente" component={ModuloPagoNominaGerente} roles={['Administrador']} />
         <PrivateRoute path="/TabladeUsuarios" component={TablaUsuarios} roles={['Administrador']} />
+        <PrivateRoute path="/ModuloGerenteCertificado" component={HomeGerenteCertificados} roles={['Administrador']} />
         <PrivateRoute path="/TablaDatosGerente" component={TablaDatosGerente} roles={['Administrador']} />
         <PrivateRoute path="/CuentaBanco" component={CuentaBanco} roles={['Empleado']} />
         <PrivateRoute path="/Gerente" component={HomeGerente} roles={['Administrador']} />
