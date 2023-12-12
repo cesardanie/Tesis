@@ -52,7 +52,7 @@ const CuentaBancariaGerente = () => {
       // Lógica para guardar la cuenta utilizando el servicio
       const respuesta=await ServiceCambiodeCuenta.InsertarDatos(nuevaCuenta);
       console.log(respuesta);
-      if(respuesta.data.Estado===true)
+      if(respuesta.Estado===true)
       {
         window.alert("Se agrego correctamente la cuenta")
         window.location.reload();

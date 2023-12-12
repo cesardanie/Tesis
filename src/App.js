@@ -16,6 +16,7 @@ import TablaUsuarios from './Components/TablaUsuarios';
 import PrivateRoute from './Components/PrivateRoute';
 import GestionarDiasAdmi from './Components/GestionarDiasAdmi';
 import CuentaBancariaGerente from './Components/CuentaBancariaGerente';
+import ModuloPagoNominaGerente from './Components/ModuloPagoNominaGerente';
 function App() {
 
 
@@ -24,6 +25,7 @@ function App() {
     <Router>
       <Layout>
       <Switch>
+        <PrivateRoute path="/ModulodepagodenominaGerente" component={ModuloPagoNominaGerente} roles={['Administrador']} />
         <PrivateRoute path="/TabladeUsuarios" component={TablaUsuarios} roles={['Administrador']} />
         <PrivateRoute path="/TablaDatosGerente" component={TablaDatosGerente} roles={['Administrador']} />
         <PrivateRoute path="/CuentaBanco" component={CuentaBanco} roles={['Empleado']} />

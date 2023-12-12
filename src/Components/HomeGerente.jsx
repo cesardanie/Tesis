@@ -23,7 +23,7 @@ const HomeGerente = () => {
   }
 
   const redireccionarPagodeNomina = () => {
-    history.push('/PagodeNomina');
+    history.push('/ModulodepagodenominaGerente');
     window.location.reload();
   }
   const RedireccionarTabladeUsuarios=()=>
