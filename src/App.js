@@ -17,7 +17,6 @@ import PrivateRoute from './Components/PrivateRoute';
 import GestionarDiasAdmi from './Components/GestionarDiasAdmi';
 import CuentaBancariaGerente from './Components/CuentaBancariaGerente';
 import ModuloPagoNominaGerente from './Components/ModuloPagoNominaGerente';
-import Firma from '../src/Components/Componente/Firma';
 import HomeGerenteCertificados from './Components/HomeGerenteCertificados';
 function App() {
 

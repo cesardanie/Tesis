@@ -53,35 +53,35 @@ const HomeGerente = () => {
       <div className="options-container">
         <div className="option">
           <h2>Permisos de los empleados</h2>
-          <p>En esta parte encontrarás todas las solicitudes de permisos agendadas</p>
+          <p>En esta parte encontrarás todas las solicitudes de permisos agendadas de los colaboradores y podras autorizar </p>
           <button className="button option" onClick={redireccionarDias}>
             Gestionar Días
           </button>
         </div>
         <div className="option">
           <h2>Certificados</h2>
-          <p>En esta Opcion podra poner la firma y autorizar los certificados .</p>
+          <p>En esta Opcion podra poner la firma y autorizar los certificados de tus colaboradores .</p>
           <button className="button option" onClick={redireccionarCertificados}>
             Certificados
           </button>
         </div>
         <div className="option">
           <h2>Pagos de Nomina</h2>
-          <p>En esta opcion se mostrara los pagos de nomina del empleado que esta autenticado</p>
+          <p>En esta opcion se gestionara el pago de nomina de los empleados</p>
           <button className="button option" onClick={redireccionarPagodeNomina}>
             Pagos de Nomina
           </button>
         </div>
         <div className="option">
           <h2>Certificados laborales</h2>
-          <p>En esta Opcion se expediran certificados laborales</p>
+          <p>En esta Opcion se gestionara los certificados laborales</p>
           <button className="button option">
             Certificados laborales
           </button>
         </div>
         <div className="option">
           <h2>Cambio de cuenta bancaria</h2>
-          <p>el cambio de la cuenta bancaria a otro banco</p>
+          <p>el cambio de la cuenta bancaria a otro banco o la creacion de a misma</p>
           <button className="button option" onClick={RedireccionarTabladeCuentaBancaria}>
             cambio de cuenta
           </button>

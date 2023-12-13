@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import SignatureCanvas from 'react-signature-canvas';
+import ServiceFirma from '../../Services/ServiceFirma';
 
 const Firma = ({ onFirmaListo }) => {
   const firmaCanvas = useRef();
@@ -8,9 +9,19 @@ const Firma = ({ onFirmaListo }) => {
     firmaCanvas.current.clear();
   };
 
-  const guardarFirma = () => {
+  const guardarFirma = async () => {
     const firmaBase64 = firmaCanvas.current.toDataURL();
     onFirmaListo(firmaBase64);
+
+    try {
+      console.log(firmaBase64)
+      const respuestaServicio = await ServiceFirma.PostFirma(firmaBase64);
+      console.log(respuestaServicio);
+      // Manejar la respuesta del servicio según tus necesidades
+    } catch (error) {
+      console.error('Error al llamar al servicio de firma:', error.message);
+      // Manejar el error según tus necesidades
+    }
   };
 
   return (

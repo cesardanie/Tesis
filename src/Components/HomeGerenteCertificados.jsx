@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import Firma from './Componente/Firma';
+import { useHistory } from "react-router";
 
 const HomeGerenteCertificados = () => {
   const [opcionSeleccionada, setOpcionSeleccionada] = useState(null);
-
+  let history = useHistory();
   const handleOpcionSeleccionada = (opcion) => {
     setOpcionSeleccionada(opcion);
+  };
+  const RedireccionarMenu = () => {
+    history.push('/Gerente');
+    window.location.reload();
   };
 
   return (
@@ -30,6 +35,11 @@ const HomeGerenteCertificados = () => {
           <p>Contenido de autorización de documentos...</p>
         </div>
       )}
+      <br />
+      <br />
+      <button type="button" onClick={RedireccionarMenu}>Menu Principal</button>
+      <br />
+      <br />
     </div>
   );
 };
