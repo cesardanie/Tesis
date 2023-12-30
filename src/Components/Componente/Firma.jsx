@@ -17,6 +17,9 @@ const Firma = ({ onFirmaListo }) => {
       console.log(firmaBase64)
       const respuestaServicio = await ServiceFirma.PostFirma(firmaBase64);
       console.log(respuestaServicio);
+      if(respuestaServicio.Estado==true){
+        window.alert("se agrego correctamente la firma");
+      }
       // Manejar la respuesta del servicio según tus necesidades
     } catch (error) {
       console.error('Error al llamar al servicio de firma:', error.message);
