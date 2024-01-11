@@ -6,16 +6,17 @@ const ServiceFirma = {
       const sessionString = localStorage.getItem('session');
       const sessionObject = JSON.parse(sessionString);
       const token = sessionObject.token;
-      const id = sessionObject.id;
 
       const response = await axios.post(
         'http://localhost:3023/apiseis/FirmaInsert',
-        { id, firmaBase64 },
+        firmaBase64,
         {
           headers: {
             'authorization': token,
-            'Content-Type': 'application/json',
+            'Content-Type': 'multipart/form-data',
+          
           },
+          
         }
       );
 
