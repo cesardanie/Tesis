@@ -18,6 +18,7 @@ import GestionarDiasAdmi from './Components/GestionarDiasAdmi';
 import CuentaBancariaGerente from './Components/CuentaBancariaGerente';
 import ModuloPagoNominaGerente from './Components/ModuloPagoNominaGerente';
 import HomeGerenteCertificados from './Components/HomeGerenteCertificados';
+import FileDownloader from './Components/FileDownloader';
 function App() {
 
 
@@ -26,6 +27,7 @@ function App() {
     <Router>
       <Layout>
       <Switch>
+        <Route path="/DocumentosDescarga" component={FileDownloader}/>
         <PrivateRoute path="/ModulodepagodenominaGerente" component={ModuloPagoNominaGerente} roles={['Administrador']} />
         <PrivateRoute path="/TabladeUsuarios" component={TablaUsuarios} roles={['Administrador']} />
         <PrivateRoute path="/ModuloGerenteCertificado" component={HomeGerenteCertificados} roles={['Administrador']} />

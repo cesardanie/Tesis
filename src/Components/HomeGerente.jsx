@@ -73,13 +73,6 @@ const HomeGerente = () => {
           </button>
         </div>
         <div className="option">
-          <h2>Certificados laborales</h2>
-          <p>En esta Opcion se gestionara los certificados laborales</p>
-          <button className="button option">
-            Certificados laborales
-          </button>
-        </div>
-        <div className="option">
           <h2>Cambio de cuenta bancaria</h2>
           <p>el cambio de la cuenta bancaria a otro banco o la creacion de a misma</p>
           <button className="button option" onClick={RedireccionarTabladeCuentaBancaria}>

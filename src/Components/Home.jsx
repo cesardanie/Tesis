@@ -61,13 +61,6 @@ const cerrarSesion = () => {
                Pagos de Nomina
             </button>
         </div>
-        <div className="option option-4"> {/* Clase de estilo única para la opción 4 */}
-          <h2>Certificados laborales</h2>
-          <p>En esta Opcion se expediran certificados laborales</p>
-          <button className="button" onClick={redireccionarCertificadolaboral}>
-               Certificados laborales
-            </button>
-        </div>
         <div className="option option-5"> {/* Clase de estilo única para la opción 5 */}
           <h2>Cambio de cuenta bancaria</h2>
           <p>el cambio de la cuenta bancaria a otro banco</p>
