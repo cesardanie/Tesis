@@ -1,8 +1,11 @@
 // FileDownloader.jsx
 import AssignmentReturnedIcon from '@mui/icons-material/AssignmentReturned';
 import React from 'react';
+import { useHistory } from "react-router";
+import GiteIcon from '@mui/icons-material/Gite';
 
 const FileDownloader = () => {
+    let history = useHistory();
   const handleDownload = (fileType) => {
     let fileName, fileContent;
 
@@ -29,10 +32,16 @@ const FileDownloader = () => {
     link.download = fileName;
     link.click();
   };
+  const RedireccionarMenu = () => {
+    history.push('/Gerente');
+    window.location.reload();
+  };
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center' }}>
       <div style={{ margin: '10px' }}>
+
+
         <button
           onClick={() => handleDownload('constancia')}
           style={{ backgroundColor: 'lightgreen', color: 'darkgreen', padding: '10px', margin: '5px' }}
@@ -56,6 +65,15 @@ const FileDownloader = () => {
           Descargar Certificado de Cesantías <AssignmentReturnedIcon/>
         </button>
       </div>
+      <div style={{ margin: '10px' }}>
+        <button
+        onClick={RedireccionarMenu}
+          style={{ backgroundColor: 'lightcoral', color: 'darkred', padding: '10px', margin: '5px' }}
+        >
+         Menu Principal <GiteIcon/>
+        </button>
+      </div>
+      
       <br/>
       <br/>
       <br/>

@@ -12,12 +12,18 @@ const HomeGerenteCertificados = () => {
     history.push('/Gerente');
     window.location.reload();
   };
-
+  const RedireccionarMenu2 = () => {
+    history.push('/DocumentosDescarga');
+    window.location.reload();
+  };
   return (
     <div style={{ textAlign: 'center', marginTop: '20px' }}>
       <h1>Bienvenido Gerente</h1>
       <div style={{ display: 'flex', justifyContent: 'space-around', margin: '20px' }}>
         <button onClick={() => handleOpcionSeleccionada('firmar')}>Firmar Documentos</button>
+      </div>
+      <div style={{ display: 'flex', justifyContent: 'space-around', margin: '20px' }}>
+      <button type="button" onClick={RedireccionarMenu2}>Descargar documentos</button>
       </div>
 
       {opcionSeleccionada === 'firmar' && (

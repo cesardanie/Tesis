@@ -27,7 +27,7 @@ function App() {
     <Router>
       <Layout>
       <Switch>
-        <Route path="/DocumentosDescarga" component={FileDownloader}/>
+        <PrivateRoute path="/DocumentosDescarga" component={FileDownloader} roles={['Administrador']}/>
         <PrivateRoute path="/ModulodepagodenominaGerente" component={ModuloPagoNominaGerente} roles={['Administrador']} />
         <PrivateRoute path="/TabladeUsuarios" component={TablaUsuarios} roles={['Administrador']} />
         <PrivateRoute path="/ModuloGerenteCertificado" component={HomeGerenteCertificados} roles={['Administrador']} />
