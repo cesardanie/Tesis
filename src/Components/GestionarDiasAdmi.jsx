@@ -46,6 +46,14 @@ const GestionarDiasAdmi = () => {
       SessionService.clearSession();
     }
   };
+    // Función para formatear la fecha en el formato "dia/mes/año"
+    const formatFecha = (fecha) => {
+      const dateObj = new Date(fecha);
+      const dia = dateObj.getDate();
+      const mes = dateObj.getMonth() + 1; // Los meses comienzan desde 0, por eso sumamos 1
+      const año = dateObj.getFullYear();
+      return `${dia}/${mes}/${año}`;
+    };
 
   return (
     <div>
@@ -64,11 +72,11 @@ const GestionarDiasAdmi = () => {
         </thead>
         <tbody>
           {data?.map((item) => (
-            <tr key={item.id}>
+            <tr key={item?.id}>
               <td>{item.id}</td>
               <td>{item.correo}</td>
-              <td>{item.DiaInicial}</td>
-              <td>{item.Diafinal}</td>
+              <td>{formatFecha(item.DiaInicial)}</td>
+              <td>{formatFecha(item.Diafinal)}</td>
               <td>{item.Observacion}</td>
               <td>{item.Estado}</td>
               <td>

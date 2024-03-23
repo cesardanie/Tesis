@@ -10,32 +10,28 @@ const Firma = ({ onFirmaListo }) => {
   };
 
   const guardarFirma = async () => {
-    const firmaBase64 = firmaCanvas.current.toDataURL();
+    const canvas = firmaCanvas.current.getCanvas();
+    const blobCallback = async(blob) => {
+      try {
+        const formData = new FormData();
+        const sessionString = localStorage.getItem('session');
+        const sessionObject = JSON.parse(sessionString);
+        const id = sessionObject.id;
+        formData.append('id', id);
+        formData.append('firma', blob); // Agregar el Blob al FormData con un nombre y tipo de archivo
 
-    try {
-      // Convertir la firma a un objeto Blob
-      const firmaBlob = await fetch(firmaBase64).then((res) => res.blob());
+        const respuestaServicio = await ServiceFirma.PostFirma(formData);
+        console.log(respuestaServicio);
 
-      // Crear un objeto FormData
-      const formData = new FormData();
-      const sessionString = localStorage.getItem('session');
-      const sessionObject = JSON.parse(sessionString);
-      const id = sessionObject.id;
-      formData.append('id',id);
-      formData.append('firma', firmaBlob, 'firma.png');
-
-      // Adjuntar la firma al servicio utilizando FormData
-      const respuestaServicio = await ServiceFirma.PostFirma(formData);
-      console.log(respuestaServicio);
-
-      if (respuestaServicio.Estado === true) {
-        window.alert('Se agregó correctamente la firma');
+        if (respuestaServicio.Estado === true) {
+          window.alert('Se agregó correctamente la firma');
+        }
+      } catch (error) {
+        console.error('Error al llamar al servicio de firma:', error.message);
       }
-      // Manejar la respuesta del servicio según tus necesidades
-    } catch (error) {
-      console.error('Error al llamar al servicio de firma:', error.message);
-      // Manejar el error según tus necesidades
-    }
+    };
+
+    canvas.toBlob(blobCallback, 'image/png'); // Convertir el canvas a Blob y llamar a la función callback con el Blob
   };
 
   const descargarFirma = () => {

@@ -51,6 +51,7 @@ const CalendarModule = () => {
     history.push('/Home');
     window.location.reload();
   };
+
   return (
     <div className="larger-calendar-container">
       <h1>Seleccionar un rango de fechas</h1>

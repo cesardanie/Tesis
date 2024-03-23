@@ -20,7 +20,13 @@ const DataTable = () => {
 
     fetchData();
   }, []);
-
+  const formatFecha = (fecha) => {
+    const dateObj = new Date(fecha);
+    const dia = dateObj.getDate();
+    const mes = dateObj.getMonth() + 1; // Los meses comienzan desde 0, por eso sumamos 1
+    const año = dateObj.getFullYear();
+    return `${dia}/${mes}/${año}`;
+  };
   return (
     <div>
       <h2>Estado de Solicitudes</h2>
@@ -36,8 +42,8 @@ const DataTable = () => {
         <tbody>
           {dias.map((entry, index) => (
             <tr key={index}>
-              <td>{entry.DiaInicial}</td>
-              <td>{entry.Diafinal}</td>
+              <td>{formatFecha(entry.DiaInicial)}</td>
+              <td>{formatFecha(entry.Diafinal)}</td>
               <td>{entry.Observacion}</td>
               <td>{entry.Estado}</td>
             </tr>

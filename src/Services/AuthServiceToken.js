@@ -1,7 +1,9 @@
 const AuthServiceToken = {
     
     isLoggedIn: () => {
+        
         const sessionString = localStorage.getItem('session');
+        console.log(sessionString)
         if(sessionString)
         {
             const sessionString = localStorage.getItem('session');
