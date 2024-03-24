@@ -22,9 +22,6 @@ const HomeGerenteCertificados = () => {
       <div style={{ display: 'flex', justifyContent: 'space-around', margin: '20px' }}>
         <button onClick={() => handleOpcionSeleccionada('firmar')}>Firmar Documentos</button>
       </div>
-      <div style={{ display: 'flex', justifyContent: 'space-around', margin: '20px' }}>
-      <button type="button" onClick={RedireccionarMenu2}>Descargar documentos</button>
-      </div>
 
       {opcionSeleccionada === 'firmar' && (
         <div>
