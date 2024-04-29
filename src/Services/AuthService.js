@@ -6,7 +6,7 @@ const AuthService = {
       Correo=Correo.toLowerCase();
       Correo=CryptoJS.AES.encrypt(Correo,`${process.env.REACT_APP_MY_KEY}`).toString();
       Contrasena=CryptoJS.AES.encrypt(Contrasena,`${process.env.REACT_APP_MY_KEY}`).toString();    
-      const response = await axios.post(`https://backentesis-c23c16c1c921.herokuapp.com/api/IniciarSesion`, {
+      const response = await axios.post(`http://18.212.252.249:3023/api/IniciarSesion`, {
         Correo,
         Contrasena
       });
