@@ -26,12 +26,14 @@ html, body {
   
   .options-container {
     display: flex;
-    justify-content: center;
-    gap: 20px;
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan a la siguiente línea si no caben en una sola línea */
+    justify-content: center; /* Centra los elementos horizontalmente */
   }
   
   .option {
-    background-color: #f0f0f0;
+    flex: 1; /* Ajusta el tamaño de las opciones para que ocupen el mismo espacio horizontalmente */
+    max-width: 300px; /* Ancho máximo para cada opción */
+    margin: 10px; /* Margen entre las opciones */
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -70,12 +72,7 @@ html, body {
     margin-bottom: 10px; /* Agrega espacio inferior para separar los títulos de los párrafos */
   }
   .button {
-    background-color: #ff6600; /* Color naranja para los botones */
-    color: white; /* Texto en color blanco para contraste */
-    border: none; /* Sin borde */
-    padding: 10px 20px; /* Espaciado interno */
-    border-radius: 8px; /* Borde redondeado */
-    cursor: pointer; /* Cambia el cursor al pasar el mouse */
+    margin-top: 10px; /* Espaciado superior para separar los botones del texto */
   }
   
   .button:hover {

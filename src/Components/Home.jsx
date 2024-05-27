@@ -42,7 +42,7 @@ const Home = () => {
       <div className="options-container">
         <div className="option">
           <h2>Gestionar días de permiso</h2>
-          <p>En esta sección, los usuarios encontrarán el calendario para agendar los días de permiso que deseen tener.</p>
+          <p>En esta sección, los usuarios encontrarán el calendario para agendar los días de permiso que deseen..</p>
           <button className="button" onClick={redireccionarDias}>
             Gestionar Días
           </button>
@@ -55,7 +55,7 @@ const Home = () => {
         </div>
         <div className="option option-3"> {/* Clase de estilo única para la opción 3 */}
           <h2>Pagos de Nomina</h2>
-          <p>En esta opción, se mostrarán los pagos de nómina del empleado autenticado</p>
+          <p>En esta opción, se mostrarán los pagos de nómina del empleado autenticado.</p>
           <button className="button" onClick={redireccionarPagodeNomina}>
             Pagos de Nomina
           </button>
