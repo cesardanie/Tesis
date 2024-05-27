@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const ServicioDedocumentos = {
-  PostDocumento: async (id,numero) => {
+  PostDocumento: async (id, numero, tipo) => {
     try {
       const sessionString = localStorage.getItem('session');
       const sessionObject = JSON.parse(sessionString);
@@ -10,7 +10,7 @@ const ServicioDedocumentos = {
       // Incluir el 'id' en los datos que se envían en la solicitud POST
       const response = await axios.post(
         'http://localhost:3023/apisiete/ObtenerCertificadolaboral',
-        { id: id , Opcion:numero}, // Aquí se envía el id como parte de los datos
+        { id: id , Opcion:numero, tipo:tipo}, // Aquí se envía el id como parte de los datos
         {
           headers: {
             'Content-Type': 'application/json',
