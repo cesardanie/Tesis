@@ -7,7 +7,7 @@ const ServiceCambiodeCuenta = {
       const token = sessionObject.token;
       const id=sessionObject.id;
       data.id = id;
-      const response = await axios.post('http://18.212.252.249:3023/apicuatro/cambiarcuenta', data, // Pasa los datos del nuevo usuario como el cuerpo de la solicitud
+      const response = await axios.post('http://localhost:3023/apicuatro/cambiarcuenta', data, // Pasa los datos del nuevo usuario como el cuerpo de la solicitud
       {
         headers: {
           'authorization': `${token}`,
@@ -25,7 +25,7 @@ const ServiceCambiodeCuenta = {
       const token = sessionObject.token;
       const id = sessionObject.id;
       console.log("paso por aqui", id, token)
-      const response = await axios.post('http://18.212.252.249:3023/apicuatro/OntenerCuenta', { id },{
+      const response = await axios.post('http://localhost:3023/apicuatro/OntenerCuenta', { id },{
           headers: {
               'authorization': `${token}`,
             }
@@ -41,7 +41,7 @@ const ServiceCambiodeCuenta = {
       const sessionString = localStorage.getItem('session');
       const sessionObject = JSON.parse(sessionString);
       const token = sessionObject.token;
-      const response = await axios.get('http://18.212.252.249:3023/apicuatro/obtenerDatosCompletos',{
+      const response = await axios.get('http://localhost:3023/apicuatro/obtenerDatosCompletos',{
           headers: {
               'authorization': `${token}`,
             }
@@ -58,7 +58,7 @@ const ServiceCambiodeCuenta = {
       const sessionString = localStorage.getItem('session');
       const sessionObject = JSON.parse(sessionString);
       const token = sessionObject.token;
-      const response = await axios.post('http://18.212.252.249:3023/apicuatro/IngresarDatosdecuenta',{data},{
+      const response = await axios.post('http://localhost:3023/apicuatro/IngresarDatosdecuenta',{data},{
           headers: {
               'authorization': `${token}`,
             }

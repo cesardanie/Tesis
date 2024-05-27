@@ -6,7 +6,7 @@ const ServiceUsuarios = {
         const sessionString = localStorage.getItem('session');
         const sessionObject = JSON.parse(sessionString);
         const token = sessionObject.token;
-        const response = await axios.get('http://18.212.252.249/api/ObtenerUsuarios',{
+        const response = await axios.get('http://localhost:3023/api/ObtenerUsuarios',{
             headers: {
                 'authorization': `${token}`,
               }
@@ -23,7 +23,7 @@ const ServiceUsuarios = {
       const sessionString = localStorage.getItem('session');
       const sessionObject = JSON.parse(sessionString);
       const token = sessionObject.token;
-      const response = await axios.post('http://18.212.252.249/delete/EliminarUsuarios', {
+      const response = await axios.post('http://localhost:3023/delete/EliminarUsuarios', {
         id: id,
       },{
           headers: {
@@ -42,7 +42,7 @@ const ServiceUsuarios = {
       const sessionObject = JSON.parse(sessionString);
       const token = sessionObject.token;
       const response = await axios.post(
-        'http://18.212.252.249:3023/add/AgregarUsuarios',
+        'http://localhost:3023/add/AgregarUsuarios',
         nuevoUsuario, // Pasa los datos del nuevo usuario como el cuerpo de la solicitud
         {
           headers: {
