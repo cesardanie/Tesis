@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../Estilos/Home.css';
 import { useHistory } from "react-router";
 import SessionService from '../Services/SessionService';
-
+import Servicehojadevida from '../Services/Servicehojadevida';
 
 const Home = () => {
   let history = useHistory();
+  const [file, setFile] = useState(null);
   const redireccionarDias = () => {
     history.push('/Calendario');
     window.location.reload();
@@ -27,12 +28,31 @@ const Home = () => {
     console.log("se dio click")
     window.location.reload();
   }
+  const redireccionarHojaDeVida = () => {
+    history.push('/CargarHojaDeVida');
+    window.location.reload();
+  }
   const cerrarSesion = () => {
     // Eliminar datos de la sesión al hacer clic en cerrar sesión
     SessionService.clearSession();
     // Redirigir a la página de inicio de sesión u otra página
     history.push('/');
     window.location.reload();
+  }
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  }
+  const  handleFileUpload =async () => {
+    if (file) {
+      const formData = new FormData();
+      const sessionString = localStorage.getItem('session');
+      const sessionObject = JSON.parse(sessionString);
+      const id = sessionObject.id;
+      formData.append('id', id);
+      formData.append('file', file);
+      const respuestaServicio = await Servicehojadevida.PostHojadevida(formData);
+      console.log(respuestaServicio);
+    }
   }
 
   return (
@@ -66,6 +86,11 @@ const Home = () => {
           <button className="button" onClick={redireccionarCuentaBancaria}>
             Cambio de cuenta
           </button>
+        </div>
+        <div className="option option-6"> {/* Clase de estilo única para la opción 6 */}
+          <h2>Cargar Hoja de Vida</h2>
+          <p>En esta sección, los usuarios podrán cargar sus hojas de vida.</p>
+          <input type="file" onChange={handleFileChange} />
         </div>
       </div>
       {/* Agregar el botón de cerrar sesión */}
