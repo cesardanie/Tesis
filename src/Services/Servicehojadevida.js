@@ -7,7 +7,7 @@ const Servicehojadevida = {
       const sessionObject = JSON.parse(sessionString);
       const token = sessionObject.token;
       debugger
-      const responsed=await axios.post('http://localhost:3023/apiseis/FirmaInsert',firmaBase64,
+      const responsed=await axios.post('http://localhost:3023/apiocho/Hojadevida',firmaBase64,
       {
         headers: { 'Content-Type': 'multipart/form-data',
                   'authorization': `${token}`,}

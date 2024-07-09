@@ -7,31 +7,38 @@ import Servicehojadevida from '../Services/Servicehojadevida';
 const Home = () => {
   let history = useHistory();
   const [file, setFile] = useState(null);
+
   const redireccionarDias = () => {
     history.push('/Calendario');
     window.location.reload();
   }
+
   const redireccionarCertificados = () => {
     history.push('/Certificados');
     window.location.reload();
   }
+
   const redireccionarPagodeNomina = () => {
     history.push('/PagodeNomina');
     window.location.reload();
   }
+
   const redireccionarCertificadolaboral = () => {
     history.push('/CertificadoLaboral');
     window.location.reload();
   }
+
   const redireccionarCuentaBancaria = () => {
     history.push('/CuentaBanco');
     console.log("se dio click")
     window.location.reload();
   }
+
   const redireccionarHojaDeVida = () => {
     history.push('/CargarHojaDeVida');
     window.location.reload();
   }
+
   const cerrarSesion = () => {
     // Eliminar datos de la sesión al hacer clic en cerrar sesión
     SessionService.clearSession();
@@ -39,20 +46,26 @@ const Home = () => {
     history.push('/');
     window.location.reload();
   }
+
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
   }
-  const  handleFileUpload =async () => {
-    if (file) {
-      const formData = new FormData();
-      const sessionString = localStorage.getItem('session');
-      const sessionObject = JSON.parse(sessionString);
-      const id = sessionObject.id;
-      formData.append('id', id);
-      formData.append('file', file);
-      const respuestaServicio = await Servicehojadevida.PostHojadevida(formData);
-      console.log(respuestaServicio);
+
+  const handleFileUpload = async () => {
+    if (!file) {
+      console.log("No se ha seleccionado ningún archivo.");
+      return;
     }
+
+    console.log("entro", file);
+    const formData = new FormData();
+    const sessionString = localStorage.getItem('session');
+    const sessionObject = JSON.parse(sessionString);
+    const id = sessionObject.id;
+    formData.append('id', id);
+    formData.append('file', file);
+    const respuestaServicio = await Servicehojadevida.PostHojadevida(formData);
+    console.log(respuestaServicio);
   }
 
   return (
@@ -91,6 +104,7 @@ const Home = () => {
           <h2>Cargar Hoja de Vida</h2>
           <p>En esta sección, los usuarios podrán cargar sus hojas de vida.</p>
           <input type="file" onChange={handleFileChange} />
+          <button className="button" onClick={handleFileUpload}>Subir</button>
         </div>
       </div>
       {/* Agregar el botón de cerrar sesión */}
@@ -100,7 +114,5 @@ const Home = () => {
     </div>
   );
 }
-
-
 
 export default Home;
