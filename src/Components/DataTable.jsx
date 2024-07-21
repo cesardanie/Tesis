@@ -40,7 +40,7 @@ const DataTable = () => {
           </tr>
         </thead>
         <tbody>
-          {dias.map((entry, index) => (
+          {dias?.map((entry, index) => (
             <tr key={index}>
               <td>{formatFecha(entry.DiaInicial)}</td>
               <td>{formatFecha(entry.Diafinal)}</td>

@@ -34,11 +34,14 @@ const Home = () => {
     window.location.reload();
   }
 
-  const redireccionarHojaDeVida = () => {
-    history.push('/CargarHojaDeVida');
+  const redireccionaportesvoluntarios = () => {
+    history.push('/aportesvoluntarios');
     window.location.reload();
   }
-
+  const redireccionamovilidadinterna = () => {
+    history.push('/MovilidadInterna');
+    window.location.reload();
+  }
   const cerrarSesion = () => {
     // Eliminar datos de la sesión al hacer clic en cerrar sesión
     SessionService.clearSession();
@@ -74,8 +77,8 @@ const Home = () => {
       <br />
       <div className="options-container">
         <div className="option">
-          <h2>Gestionar días de permiso</h2>
-          <p>En esta sección, los usuarios encontrarán el calendario para agendar los días de permiso que deseen..</p>
+          <h2>Gestionar días de permiso o incapacidad</h2>
+          <p>En esta sección, los usuarios encontrarán el calendario para agendar los días de permiso que deseen, o la gestion de incapcadidades y excusas medicas</p>
           <button className="button" onClick={redireccionarDias}>
             Gestionar Días
           </button>
@@ -105,6 +108,36 @@ const Home = () => {
           <p>En esta sección, los usuarios podrán cargar sus hojas de vida.</p>
           <input type="file" onChange={handleFileChange} />
           <button className="button" onClick={handleFileUpload}>Subir</button>
+        </div>
+      </div>
+      <div className="options-container">
+        <div className="option option-2"> {/* Clase de estilo única para la opción 5 */}
+          <h2>Aportes voluntarios</h2>
+          <p>Contribuciones adicionales que los empleados deciden hacer, generalmente a fondos de pensiones o a otros tipos de ahorro voluntario</p>
+          <button className="button" onClick={redireccionarCuentaBancaria}>
+            Historial de aportes voluntarios
+          </button>
+        </div>
+        <div className="option option-5"> {/* Clase de estilo única para la opción 5 */}
+          <h2>Movilidad Interna</h2>
+          <p>Contribuciones adicionales que los empleados deciden hacer, generalmente a fondos de pensiones o a otros tipos de ahorro voluntario</p>
+          <button className="button" onClick={redireccionamovilidadinterna}>
+            Movilidad Interna
+          </button>
+        </div>
+        <div className="option option-5"> {/* Clase de estilo única para la opción 5 */}
+          <h2>Vacaciones reintegradas</h2>
+          <p>Contribuciones adicionales que los empleados deciden hacer, generalmente a fondos de pensiones o a otros tipos de ahorro voluntario</p>
+          <button className="button" onClick={redireccionarCuentaBancaria}>
+            Vacaciones reintegradas
+          </button>
+        </div>
+        <div className="option option-5"> {/* Clase de estilo única para la opción 5 */}
+          <h2>Afilaciones</h2>
+          <p>Contribuciones adicionales que los empleados deciden hacer, generalmente a fondos de pensiones o a otros tipos de ahorro voluntario.</p>
+          <button className="button" onClick={redireccionarCuentaBancaria}>
+            Afiliaciones
+          </button>
         </div>
       </div>
       {/* Agregar el botón de cerrar sesión */}

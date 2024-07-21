@@ -23,6 +23,7 @@ const CalendarModule = () => {
     };
   
     try {
+      debugger
       const response = await ServiceCalendario.CargarDias(data);
       if(response.Estado==true)
       {
@@ -73,7 +74,7 @@ const CalendarModule = () => {
           />
         </div>
         <div className="form-group">
-          <label>Observaciones de sus vacaciones</label>
+          <label>Observaciones de sus vacaciones o incapacidad</label>
           <textarea
             value={observaciones || ''}
             onChange={(e) => setObservaciones(e.target.value)}

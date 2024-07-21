@@ -19,6 +19,7 @@ import CuentaBancariaGerente from './Components/CuentaBancariaGerente';
 import ModuloPagoNominaGerente from './Components/ModuloPagoNominaGerente';
 import HomeGerenteCertificados from './Components/HomeGerenteCertificados';
 import FileDownloader from './Components/FileDownloader';
+import MovilidadinternaClient from './Components/MovilidadinternaClient';
 function App() {
 
 
@@ -41,6 +42,7 @@ function App() {
         <PrivateRoute path="/modallogin" exact component={ModalLogin} roles={['Administrador']}/>
         <PrivateRoute path="/CuentaBancariaGerente" exact component={CuentaBancariaGerente} roles={['Administrador']}/>
         <PrivateRoute path="/Home"  component={Home} roles={['Empleado']}/>
+        <PrivateRoute path="/MovilidadInterna"  component={MovilidadinternaClient} roles={['Empleado']}/>
         <PrivateRoute path="/GerenteDias"  component={GestionarDiasAdmi} roles={['Administrador']}/>
         <Route path="/" exact component={Login}/>
         <Route path="*" component={NotFound} />
