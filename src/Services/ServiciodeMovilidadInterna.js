@@ -11,35 +11,35 @@ const ServicioMovilidadInterna = {
         'http://localhost:3023/apinueve/Movilidadinterna',
         {
           headers: {
-            'authorization': `${token}`,
+            'authorization': `Bearer ${token}`, // Usa 'Bearer' en el header de autorización
           }
         }
       );
 
       return response.data;
     } catch (error) {
-      console.error('Error ', error);
+      console.error('Error al obtener las ofertas:', error);
       throw new Error('Error al obtener data');
     }
   },
-  PostOferta: async (id,Titulo,Estado,Descripcion
 
-  ) => {
+  PostOferta: async (nuevaOferta) => {
     try {
       const sessionString = localStorage.getItem('session');
       const sessionObject = JSON.parse(sessionString);
       const token = sessionObject.token;
-
+      console.log(nuevaOferta)
       const response = await axios.post(
-        'http://localhost:3023/apinueve/CreacionMovilidadInterna',{
-          id:id,
-          TituloOferta:Titulo,
-          Estado:Estado,
-          Descripcion:Descripcion
+        'http://localhost:3023/apinueve/CreacionMovilidadInterna',
+        {
+          TituloOferta: nuevaOferta.TituloOferta,
+          Estado: nuevaOferta.Estado, // Asegúrate de que el campo 'Estado' esté en el cuerpo del POST
+          Descripcion: nuevaOferta.Descripcion,
+          idUsuario:nuevaOferta.idUsuario
         },
         {
           headers: {
-            'authorization': `${token}`,
+            'authorization': `Bearer ${token}`, // Usa 'Bearer' en el header de autorización
           }
         }
       );
@@ -47,8 +47,8 @@ const ServicioMovilidadInterna = {
       return response.data;
 
     } catch (error) {
-      console.error('Error ', error);
-      throw new Error('Error al obtener data');
+      console.error('Error al crear la oferta:', error);
+      throw new Error('Error al crear la oferta');
     }
   }
 };

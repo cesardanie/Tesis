@@ -12,6 +12,7 @@ const MovilidadinternaClient = () => {
         const cargarUsuarios = async () => {
             try {
                 const data = await ServicioMovilidad.GetOfertas();
+                console.log(data)
                 setofertas(data); // Asume que data es un array con las ofertas
             } catch (error) {
                 console.error('Error al cargar usuarios:', error.message);

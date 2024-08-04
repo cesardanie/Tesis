@@ -72,4 +72,40 @@
   .reject-button:hover {
     background-color: #c82333;
   }
-  
+  /* MovilidadInternGerente.css */
+
+.movilidad-container {
+  padding: 20px;
+}
+
+.offer-card {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.button-container {
+  margin-top: 10px;
+}
+
+.apply-button {
+  background-color: #007bff;
+  border: none;
+  color: white;
+}
+
+.reject-button {
+  background-color: #dc3545;
+  border: none;
+  color: white;
+}
+
+.create-offer-form {
+  margin-top: 20px;
+}
+
+.create-button {
+  background-color: #28a745;
+  border: none;
+  color: white;
+}
