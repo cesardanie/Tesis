@@ -20,6 +20,7 @@ import ModuloPagoNominaGerente from './Components/ModuloPagoNominaGerente';
 import HomeGerenteCertificados from './Components/HomeGerenteCertificados';
 import FileDownloader from './Components/FileDownloader';
 import MovilidadinternaClient from './Components/MovilidadinternaClient';
+import OfertaMovilidadInterna from './Components/OfertaMovilidadInterna';
 function App() {
 
 
@@ -44,6 +45,7 @@ function App() {
         <PrivateRoute path="/Home"  component={Home} roles={['Empleado']}/>
         <PrivateRoute path="/MovilidadInterna"  component={MovilidadinternaClient} roles={['Empleado']}/>
         <PrivateRoute path="/GerenteDias"  component={GestionarDiasAdmi} roles={['Administrador']}/>
+        <PrivateRoute path="/MovilidadInternaGerente"  component={OfertaMovilidadInterna} roles={['Administrador']}/>
         <Route path="/" exact component={Login}/>
         <Route path="*" component={NotFound} />
       </Switch>
