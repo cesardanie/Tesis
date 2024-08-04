@@ -322,6 +322,39 @@
     border-radius: 4px;
     border: 1px solid #ddd;
 }
+.form-check {
+    margin-top: 1rem;
+}
+
+.create-offer-form {
+    background-color: #f8f9fa;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.create-button {
+    width: 100%;
+}
+.form-check {
+    margin-top: 0.5rem;
+}
+
+.create-offer-form {
+    background-color: #f8f9fa;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.create-button {
+    width: 100%;
+}
+
+.form-check-label {
+    margin-bottom: 0.5rem;
+}
+
 
 
 

@@ -9,7 +9,8 @@ const OfertaMovilidadInterna = () => {
     const [applications, setApplications] = useState({});
     const [newOffer, setNewOffer] = useState({
         TituloOferta: '',
-        Descripcion: ''
+        Descripcion: '',
+        Activo: true // Estado inicial para el botón de activo/inactivo
     });
     let history = useHistory();
 
@@ -46,18 +47,24 @@ const OfertaMovilidadInterna = () => {
     };
 
     const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setNewOffer({ ...newOffer, [name]: value });
+        const { name, value, type, checked } = e.target;
+        setNewOffer({ 
+            ...newOffer, 
+            [name]: type === 'checkbox' ? checked : value 
+        });
     };
 
     const handleCreateOffer = async (e) => {
         e.preventDefault();
         try {
+            // Llamar al servicio para crear una nueva oferta
             const response = await ServicioMovilidad.CreateOferta(newOffer);
             if (response.success) {
+                // Si la oferta se creó exitosamente, recargar las ofertas
                 const updatedOffers = await ServicioMovilidad.GetOfertas();
                 setOfertas(updatedOffers);
-                setNewOffer({ TituloOferta: '', Descripcion: '' });
+                // Limpiar el formulario
+                setNewOffer({ TituloOferta: '', Descripcion: '', Activo: true });
             } else {
                 console.error('Error al crear la oferta:', response.message);
             }
@@ -81,6 +88,22 @@ const OfertaMovilidadInterna = () => {
                             <Card.Body>
                                 <Card.Title>{offer.TituloOferta}</Card.Title>
                                 <Card.Text>{offer.Descripcion}</Card.Text>
+                                <div className="button-container">
+                                    <Button 
+                                        variant="primary" 
+                                        className="me-2 apply-button" 
+                                        onClick={() => handleApply(offer)}
+                                    >
+                                        Aplicar
+                                    </Button>
+                                    <Button 
+                                        variant="danger" 
+                                        className="reject-button" 
+                                        onClick={() => handleReject(offer)}
+                                    >
+                                        Rechazar
+                                    </Button>
+                                </div>
                                 <Button 
                                     variant="info" 
                                     className="mt-3" 
@@ -126,6 +149,16 @@ const OfertaMovilidadInterna = () => {
                         onChange={handleInputChange} 
                         required 
                         className="form-input"
+                    />
+                </Form.Group>
+                <Form.Group controlId="formActivo">
+                    <Form.Label>Activo</Form.Label>
+                    <Form.Check 
+                        type="checkbox" 
+                        name="Activo"
+                        checked={newOffer.Activo} 
+                        onChange={handleInputChange}
+                        className="form-check"
                     />
                 </Form.Group>
                 <Button variant="success" type="submit" className="mt-3 create-button">
