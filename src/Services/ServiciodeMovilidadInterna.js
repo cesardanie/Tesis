@@ -7,22 +7,19 @@ const ServicioMovilidadInterna = {
       const sessionObject = JSON.parse(sessionString);
       const token = sessionObject.token;
       
-      // Incluir el 'id' en los datos que se envían en la solicitud POST
       const response = await axios.get(
-        'http://localhost:3023/apinueve/Movilidadinterna',
-        { }, // Aquí se envía el id como parte de los datos
+        'http://localhost:3023/apinueve/Movilidadinterna', 
         {
           headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `${token}`
+            'authorization': `${token}`,
           }
         }
       );
       
       return response.data;
     } catch (error) {
-      console.error('Error al enviar la firma:', error);
-      throw new Error('Error al obtener Firma');
+      console.error('Error ', error);
+      throw new Error('Error al obtener data');
     }
   },
 };
