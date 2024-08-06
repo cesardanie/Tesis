@@ -5,31 +5,31 @@ import { useHistory } from "react-router";
 import ServicioMovilidadInterna from '../../../Tesis/src/Services/ServiciodeMovilidadInterna';
 
 const OfertaMovilidadInterna = () => {
-    const [oferta, setofertas] = useState([]);
+    const [aplicaciones, setAplicaciones] = useState([]); // Cambiado de 'oferta' a 'aplicaciones'
     const [newOffer, setNewOffer] = useState({
         TituloOferta: '',
         Descripcion: '',
-        Estado: true, // Cambiado de 'Activo' a 'Estado'
-        idUsuario: null // Inicialmente null
+        Estado: true, 
+        idUsuario: null
     });
     let history = useHistory();
 
     useEffect(() => {
-        const cargarOfertas = async () => {
+        const cargarAplicaciones = async () => {
             try {
-                const data = await ServicioMovilidadInterna.GetOfertas();
+                const data = await ServicioMovilidadInterna.GetAplicaciones(); // Se llama a GetAplicaciones
                 if (Array.isArray(data)) {
-                    setofertas(data);
+                    setAplicaciones(data); // Cambiado de 'setofertas' a 'setAplicaciones'
                 } else {
                     console.error('La respuesta no es un array:', data);
-                    setofertas([]);
+                    setAplicaciones([]);
                 }
             } catch (error) {
-                console.error('Error al cargar ofertas:', error.message);
+                console.error('Error al cargar aplicaciones:', error.message);
             }
         };
 
-        cargarOfertas();
+        cargarAplicaciones();
     }, []);
 
     const handleApply = (offer) => {
@@ -51,13 +51,13 @@ const OfertaMovilidadInterna = () => {
         e.preventDefault();
         const sessionString = localStorage.getItem('session');
         const sessionObject = JSON.parse(sessionString);
-        const idUsuario = sessionObject.id; // Obtén el idUsuario del localStorage
+        const idUsuario = sessionObject.id;
 
         try {
             const response = await ServicioMovilidadInterna.PostOferta({ ...newOffer, idUsuario });
             if (response.success) {
-                const updatedOffers = await ServicioMovilidadInterna.GetOfertas();
-                setofertas(updatedOffers);
+                const updatedOffers = await ServicioMovilidadInterna.GetAplicaciones(); // Se actualiza con GetAplicaciones
+                setAplicaciones(updatedOffers);
                 setNewOffer({ TituloOferta: '', Descripcion: '', Estado: true, idUsuario });
             } else {
                 console.error('Error al crear la oferta:', response.message);
@@ -76,20 +76,28 @@ const OfertaMovilidadInterna = () => {
         <Container className="movilidad-container">
             <h1 className="text-center my-4">Ofertas de Movilidad Interna</h1>
             <Row>
-                {oferta?.map((offer) => (
-                    <Col key={offer.Id} md={6} lg={4} className="mb-4">
+                {aplicaciones.map((aplicacion, index) => (
+                    <Col key={index} md={6} lg={4} className="mb-4">
                         <Card className="offer-card">
                             <Card.Body>
-                                <Card.Title>{offer.TituloOferta}</Card.Title>
-                                <Card.Text>{offer.Descripcion}</Card.Text>
+                                {/* Mostrar información de la oferta */}
+                                <Card.Title>{aplicacion.movilidadInfo[0].TituloOferta}</Card.Title>
+                                <Card.Text>{aplicacion.movilidadInfo[0].Descripcion}</Card.Text>
                                 <Card.Text>
-                                    Estado: {offer.Estado ? 'Activa' : 'Inactiva'}
+                                    Estado: {aplicacion.movilidadInfo[0].Estado ? 'Activa' : 'Inactiva'}
                                 </Card.Text>
+
+                                {/* Mostrar información del usuario */}
+                                <hr />
+                                <Card.Text><strong>Usuario:</strong> {aplicacion.usuarioInfo[0].Nombre}</Card.Text>
+                                <Card.Text><strong>Correo:</strong> {aplicacion.usuarioInfo[0].Correo}</Card.Text>
+                                <Card.Text><strong>Puesto:</strong> {aplicacion.usuarioInfo[0].Puesto}</Card.Text>
+
                                 <div className="button-container">
-                                    <Button variant="primary" className="me-2 apply-button" onClick={() => handleApply(offer)}>
+                                    <Button variant="primary" className="me-2 apply-button" onClick={() => handleApply(aplicacion.movilidadInfo[0])}>
                                         Activar
                                     </Button>
-                                    <Button variant="danger" className="reject-button" onClick={() => handleReject(offer)}>
+                                    <Button variant="danger" className="reject-button" onClick={() => handleReject(aplicacion.movilidadInfo[0])}>
                                         Desactivar
                                     </Button>
                                 </div>
