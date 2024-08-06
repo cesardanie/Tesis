@@ -87,10 +87,10 @@ const OfertaMovilidadInterna = () => {
                                 </Card.Text>
                                 <div className="button-container">
                                     <Button variant="primary" className="me-2 apply-button" onClick={() => handleApply(offer)}>
-                                        Aplicar
+                                        Activar
                                     </Button>
                                     <Button variant="danger" className="reject-button" onClick={() => handleReject(offer)}>
-                                        Rechazar
+                                        Desactivar
                                     </Button>
                                 </div>
                             </Card.Body>
@@ -127,7 +127,7 @@ const OfertaMovilidadInterna = () => {
                         label="Activa"
                         name="Estado"
                         checked={newOffer.Estado}
-                        onChange={handleInputChange}
+                        onChange={(e) => setNewOffer({ ...newOffer, Estado: e.target.checked })}
                     />
                 </Form.Group>
                 <Button variant="success" type="submit" className="mt-3 create-button">

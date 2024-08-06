@@ -35,7 +35,7 @@ const ServicioMovilidadInterna = {
           TituloOferta: nuevaOferta.TituloOferta,
           Estado: nuevaOferta.Estado, // Asegúrate de que el campo 'Estado' esté en el cuerpo del POST
           Descripcion: nuevaOferta.Descripcion,
-          idUsuario:nuevaOferta.idUsuario
+          idUsuario: nuevaOferta.idUsuario
         },
         {
           headers: {
@@ -50,7 +50,31 @@ const ServicioMovilidadInterna = {
       console.error('Error al crear la oferta:', error);
       throw new Error('Error al crear la oferta');
     }
-  }
+  },
+  PostAplicarOferta: async (aplicacion) => {
+    try {
+      console.log(aplicacion)
+      debugger
+      const sessionString = localStorage.getItem('session');
+      const sessionObject = JSON.parse(sessionString);
+      const token = sessionObject.token;
+      const response = await axios.post(
+        'http://localhost:3023/apinueve/MovilidadInternaAplicacion',
+        { aplicacion },
+        {
+          headers: {
+            'authorization': `Bearer ${token}`, // Usa 'Bearer' en el header de autorización
+          }
+        }
+      );
+
+      return response.data;
+
+    } catch (error) {
+      console.error('Error al crear la oferta:', error);
+      throw new Error('Error al crear la oferta');
+    }
+  },
 };
 
 export default ServicioMovilidadInterna;

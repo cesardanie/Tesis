@@ -22,9 +22,27 @@ const MovilidadinternaClient = () => {
         cargarUsuarios();
     }, []); // El segundo argumento [] asegura que se ejecute solo al montar el componente
 
-    const handleApply = (offer) => {
-        console.log(`Aplicar a la oferta: ${offer.TituloOferta}`);
+    const handleApply =async (offer) => {
+        debugger
+        const sessionString = localStorage.getItem('session');
+        const sessionObject = JSON.parse(sessionString);
+        const token = sessionObject.token;
+        const id=sessionObject.id;
+        console.log(offer);
+        const objet={
+            idUsuario:id,
+            idOferta:offer.Id
+        }
+        const data =await ServicioMovilidad.PostAplicarOferta(objet);
         // Agrega tu lógica para aplicar a la oferta
+        console.log(data);
+        debugger
+        if(data.success===true){
+            window.alert("Se aplico exitosamente tu solicitud");
+        }
+        else{
+            window.alert("No se pudo procesar");
+        }
     };
 
     const handleReject = (offer) => {
@@ -50,9 +68,6 @@ const MovilidadinternaClient = () => {
                                 <div className="button-container">
                                     <Button variant="primary" className="me-2 apply-button" onClick={() => handleApply(offer)}>
                                         Aplicar
-                                    </Button>
-                                    <Button variant="danger" className="reject-button" onClick={() => handleReject(offer)}>
-                                        Rechazar
                                     </Button>
                                 </div>
                             </Card.Body>
