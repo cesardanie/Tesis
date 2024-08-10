@@ -10,7 +10,7 @@ const OfertaMovilidadInterna = () => {
     const [newOffer, setNewOffer] = useState({
         TituloOferta: '',
         Descripcion: '',
-        Estado: true, 
+        Estado: true,
         idUsuario: null
     });
     let history = useHistory();
@@ -40,15 +40,20 @@ const OfertaMovilidadInterna = () => {
         // Agrega tu lógica para aplicar a la oferta
     };
 
-    const handleReject =async (offer) => {
+    const handleReject = async (offer) => {
         console.log(offer)
-        const respuesta={
-            id:offer.id,
+        const respuesta = {
+            id: offer.id,
         }
         const data = await ServicioMovilidadInterna.DeleteAplicaciones(respuesta) // Se llama a GetAplicaciones
         window.location.reload(); // Recargar la página
     };
+    const handleRejectcancelarofertas = async (offer) => {
+        console.log(offer)
+        const data = await ServicioMovilidadInterna.Deleteofertas(offer.Id) 
+        window.location.reload(); // Recargar la página
 
+    };
     const handleInputChange = (e) => {
         const { name, value, type, checked } = e.target;
         setNewOffer({ ...newOffer, [name]: type === 'checkbox' ? checked : value });
@@ -152,26 +157,26 @@ const OfertaMovilidadInterna = () => {
             <br />
             <br />
             <Container className="movilidad-container">
-            <h1 className="text-center my-4">Ofertas de Movilidad Interna creadas</h1>
-            <Row>
-                {oferta.map((offer) => (
-                    <Col key={offer.Id} md={6} lg={4} className="mb-4">
-                        <Card className="offer-card">
-                            <Card.Body>
-                                <Card.Title>{offer.TituloOferta}</Card.Title>
-                                <Card.Text>{offer.Descripcion}</Card.Text>
-                                <div className="button-container">
-                                    <Button variant="primary" className="me-2 apply-button" onClick={() => handleApply(offer)}>
-                                        Aplicar
-                                    </Button>
-                                </div>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                ))}
-            </Row>
-            <br />
-        </Container>
+                <h1 className="text-center my-4">Ofertas de Movilidad Interna creadas</h1>
+                <Row>
+                    {oferta.map((offer) => (
+                        <Col key={offer.Id} md={6} lg={4} className="mb-4">
+                            <Card className="offer-card">
+                                <Card.Body>
+                                    <Card.Title>{offer.TituloOferta}</Card.Title>
+                                    <Card.Text>{offer.Descripcion}</Card.Text>
+                                    <div className="button-container">
+                                        <Button variant="danger" className="reject-button" onClick={() => handleRejectcancelarofertas(offer)}>
+                                            Desactivar
+                                        </Button>
+                                    </div>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    ))}
+                </Row>
+                <br />
+            </Container>
             <Button variant="secondary" className="mt-3" onClick={RedireccionarMenu}>
                 Menu Principal
             </Button>
