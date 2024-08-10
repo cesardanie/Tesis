@@ -5,6 +5,7 @@ import { useHistory } from "react-router";
 import ServicioMovilidadInterna from '../../../Tesis/src/Services/ServiciodeMovilidadInterna';
 
 const OfertaMovilidadInterna = () => {
+    const [oferta, setofertas] = useState([]);
     const [aplicaciones, setAplicaciones] = useState([]); // Cambiado de 'oferta' a 'aplicaciones'
     const [newOffer, setNewOffer] = useState({
         TituloOferta: '',
@@ -18,6 +19,8 @@ const OfertaMovilidadInterna = () => {
         const cargarAplicaciones = async () => {
             try {
                 const data = await ServicioMovilidadInterna.GetAplicaciones(); // Se llama a GetAplicaciones
+                const datados = await ServicioMovilidadInterna.GetOfertas();
+                setofertas(datados); // Asume que data es un array con las ofertas
                 if (Array.isArray(data)) {
                     console.log(data);
                     setAplicaciones(data); // Cambiado de 'setofertas' a 'setAplicaciones'
@@ -148,6 +151,27 @@ const OfertaMovilidadInterna = () => {
             </Form>
             <br />
             <br />
+            <Container className="movilidad-container">
+            <h1 className="text-center my-4">Ofertas de Movilidad Interna creadas</h1>
+            <Row>
+                {oferta.map((offer) => (
+                    <Col key={offer.Id} md={6} lg={4} className="mb-4">
+                        <Card className="offer-card">
+                            <Card.Body>
+                                <Card.Title>{offer.TituloOferta}</Card.Title>
+                                <Card.Text>{offer.Descripcion}</Card.Text>
+                                <div className="button-container">
+                                    <Button variant="primary" className="me-2 apply-button" onClick={() => handleApply(offer)}>
+                                        Aplicar
+                                    </Button>
+                                </div>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                ))}
+            </Row>
+            <br />
+        </Container>
             <Button variant="secondary" className="mt-3" onClick={RedireccionarMenu}>
                 Menu Principal
             </Button>
