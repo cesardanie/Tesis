@@ -19,6 +19,7 @@ const OfertaMovilidadInterna = () => {
             try {
                 const data = await ServicioMovilidadInterna.GetAplicaciones(); // Se llama a GetAplicaciones
                 if (Array.isArray(data)) {
+                    console.log(data);
                     setAplicaciones(data); // Cambiado de 'setofertas' a 'setAplicaciones'
                 } else {
                     console.error('La respuesta no es un array:', data);
@@ -33,13 +34,16 @@ const OfertaMovilidadInterna = () => {
     }, []);
 
     const handleApply = (offer) => {
-        console.log(`Aplicar a la oferta: ${offer.TituloOferta}`);
         // Agrega tu lógica para aplicar a la oferta
     };
 
-    const handleReject = (offer) => {
-        console.log(`Rechazar la oferta: ${offer.TituloOferta}`);
-        // Agrega tu lógica para rechazar la oferta
+    const handleReject =async (offer) => {
+        console.log(offer)
+        const respuesta={
+            id:offer.id,
+        }
+        const data = await ServicioMovilidadInterna.DeleteAplicaciones(respuesta) // Se llama a GetAplicaciones
+        window.location.reload(); // Recargar la página
     };
 
     const handleInputChange = (e) => {
@@ -97,7 +101,7 @@ const OfertaMovilidadInterna = () => {
                                     <Button variant="primary" className="me-2 apply-button" onClick={() => handleApply(aplicacion.movilidadInfo[0])}>
                                         Activar
                                     </Button>
-                                    <Button variant="danger" className="reject-button" onClick={() => handleReject(aplicacion.movilidadInfo[0])}>
+                                    <Button variant="danger" className="reject-button" onClick={() => handleReject(aplicacion)}>
                                         Desactivar
                                     </Button>
                                 </div>
