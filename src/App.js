@@ -21,6 +21,7 @@ import HomeGerenteCertificados from './Components/HomeGerenteCertificados';
 import FileDownloader from './Components/FileDownloader';
 import MovilidadinternaClient from './Components/MovilidadinternaClient';
 import OfertaMovilidadInterna from './Components/OfertaMovilidadInterna';
+import Afilaciones from './Components/Afiliaciones';
 function App() {
 
 

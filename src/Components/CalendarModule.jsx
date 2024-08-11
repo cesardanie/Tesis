@@ -74,7 +74,7 @@ const CalendarModule = () => {
           />
         </div>
         <div className="form-group">
-          <label>Observaciones de sus vacaciones o incapacidad</label>
+          <label>Observaciones de sus vacaciones o incapacidad o si necesita vacaciones reintegradas</label>
           <textarea
             value={observaciones || ''}
             onChange={(e) => setObservaciones(e.target.value)}

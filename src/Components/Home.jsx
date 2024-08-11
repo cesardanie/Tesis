@@ -126,13 +126,6 @@ const Home = () => {
           </button>
         </div>
         <div className="option option-5"> {/* Clase de estilo única para la opción 5 */}
-          <h2>Vacaciones reintegradas</h2>
-          <p>Contribuciones adicionales que los empleados deciden hacer, generalmente a fondos de pensiones o a otros tipos de ahorro voluntario</p>
-          <button className="button" onClick={redireccionarCuentaBancaria}>
-            Vacaciones reintegradas
-          </button>
-        </div>
-        <div className="option option-5"> {/* Clase de estilo única para la opción 5 */}
           <h2>Afilaciones</h2>
           <p>Contribuciones adicionales que los empleados deciden hacer, generalmente a fondos de pensiones o a otros tipos de ahorro voluntario.</p>
           <button className="button" onClick={redireccionarCuentaBancaria}>
