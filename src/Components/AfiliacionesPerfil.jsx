@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../Estilos/PerfilyAfilaciones.css';
 import { FaUserCircle } from 'react-icons/fa';
 import ServiceAfiliadosPerfil from '../Services/ServiceAfiliadosPerfil';
-
+import { useHistory } from "react-router";
 const AfiliacionesPerfil = () => {
     const [perfil, setPerfil] = useState({
         correo: '',
@@ -11,19 +11,19 @@ const AfiliacionesPerfil = () => {
         puesto: '',
         sueldo: ''
     });
-
+    let history = useHistory();
     useEffect(() => {
         const cargarDatos = async () => {
             try {
                 const response = await ServiceAfiliadosPerfil.CargarDatainfo();
                 if (response.Estado && response.Datos.Estado) {
-                    const data = response.Datos;
+                    const data = response.Datos.Datos;
                     setPerfil({
-                        correo: data.Correo,
-                        nombre: data.Nombre,
-                        edad: data.Edad,
-                        puesto: data.Puesto,
-                        sueldo: data.Sueldo
+                        correo: data.Correo || '',
+                        nombre: data.Nombre || '',
+                        edad: data.Edad || '',
+                        puesto: data.Puesto || '',
+                        sueldo: data.Sueldo || ''
                     });
                 }
             } catch (error) {
@@ -33,7 +33,10 @@ const AfiliacionesPerfil = () => {
 
         cargarDatos();
     }, []);
-
+    const RedireccionarMenu = () => {
+        history.push('/Home');
+        window.location.reload();
+    };
     return (
         <div className="movilidad-container">
             <div className="row">
@@ -100,6 +103,7 @@ const AfiliacionesPerfil = () => {
                     </div>
                 </div>
             </div>
+            <button type="button" onClick={RedireccionarMenu}>Menu Principal</button>
         </div>
     );
 };
