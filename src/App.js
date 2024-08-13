@@ -21,7 +21,7 @@ import HomeGerenteCertificados from './Components/HomeGerenteCertificados';
 import FileDownloader from './Components/FileDownloader';
 import MovilidadinternaClient from './Components/MovilidadinternaClient';
 import OfertaMovilidadInterna from './Components/OfertaMovilidadInterna';
-import Afilaciones from './Components/Afiliaciones';
+import AfilacionesPerfil from '../src/Components/AfiliacionesPerfil';
 function App() {
 
 
@@ -45,6 +45,7 @@ function App() {
         <PrivateRoute path="/CuentaBancariaGerente" exact component={CuentaBancariaGerente} roles={['Administrador']}/>
         <PrivateRoute path="/Home"  component={Home} roles={['Empleado']}/>
         <PrivateRoute path="/MovilidadInterna"  component={MovilidadinternaClient} roles={['Empleado']}/>
+        <PrivateRoute path="/PerfilAfilaciones"  component={ AfilacionesPerfil} roles={['Empleado']}/>
         <PrivateRoute path="/GerenteDias"  component={GestionarDiasAdmi} roles={['Administrador']}/>
         <PrivateRoute path="/MovilidadInternaGerente"  component={OfertaMovilidadInterna} roles={['Administrador']}/>
         <Route path="/" exact component={Login}/>

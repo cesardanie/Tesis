@@ -33,6 +33,11 @@ const Home = () => {
     console.log("se dio click")
     window.location.reload();
   }
+  const redireccionarperfilafiliaciones = () => {
+    history.push('/PerfilAfilaciones');
+    console.log("se dio click")
+    window.location.reload();
+  }
 
   const redireccionaportesvoluntarios = () => {
     history.push('/aportesvoluntarios');
@@ -111,13 +116,6 @@ const Home = () => {
         </div>
       </div>
       <div className="options-container">
-        <div className="option option-2"> {/* Clase de estilo única para la opción 5 */}
-          <h2>Aportes voluntarios</h2>
-          <p>Contribuciones adicionales que los empleados deciden hacer, generalmente a fondos de pensiones o a otros tipos de ahorro voluntario</p>
-          <button className="button" onClick={redireccionarCuentaBancaria}>
-            Historial de aportes voluntarios
-          </button>
-        </div>
         <div className="option option-5"> {/* Clase de estilo única para la opción 5 */}
           <h2>Movilidad Interna</h2>
           <p>Contribuciones adicionales que los empleados deciden hacer, generalmente a fondos de pensiones o a otros tipos de ahorro voluntario</p>
@@ -126,9 +124,9 @@ const Home = () => {
           </button>
         </div>
         <div className="option option-5"> {/* Clase de estilo única para la opción 5 */}
-          <h2>Afilaciones</h2>
+          <h2>Perfil, Afilaciones y Aportes voluntarios</h2>
           <p>Contribuciones adicionales que los empleados deciden hacer, generalmente a fondos de pensiones o a otros tipos de ahorro voluntario.</p>
-          <button className="button" onClick={redireccionarCuentaBancaria}>
+          <button className="button" onClick={redireccionarperfilafiliaciones}>
             Afiliaciones
           </button>
         </div>
