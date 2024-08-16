@@ -23,7 +23,7 @@ const ServiceNomina = {
         const sessionString = localStorage.getItem('session');
         const sessionObject = JSON.parse(sessionString);
         const token = sessionObject.token;
-        const response = await axios.post('http://18.212.252.249/apicinco/AgregarPagos',{mes:mesSeleccionado,estado:estado,id:id},{
+        const response = await axios.post('http://localhost:3023/apicinco/AgregarPagos',{mes:mesSeleccionado,estado:estado,id:id},{
             headers: {
                 'authorization': `${token}`,
               }

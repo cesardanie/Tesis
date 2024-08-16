@@ -3,15 +3,20 @@ import '../Estilos/PerfilyAfilaciones.css';
 import { FaUserCircle } from 'react-icons/fa';
 import ServiceAfiliadosPerfil from '../Services/ServiceAfiliadosPerfil';
 import { useHistory } from "react-router";
+
 const AfiliacionesPerfil = () => {
     const [perfil, setPerfil] = useState({
         correo: '',
         nombre: '',
         edad: '',
         puesto: '',
-        sueldo: ''
+        sueldo: '',
+        pension: '',
+        cesantias: ''
     });
+    const [afiliacionesEnabled, setAfiliacionesEnabled] = useState(false);
     let history = useHistory();
+
     useEffect(() => {
         const cargarDatos = async () => {
             try {
@@ -23,7 +28,9 @@ const AfiliacionesPerfil = () => {
                         nombre: data.Nombre || '',
                         edad: data.Edad || '',
                         puesto: data.Puesto || '',
-                        sueldo: data.Sueldo || ''
+                        sueldo: data.Sueldo || '',
+                        pension: '',
+                        cesantias: ''
                     });
                 }
             } catch (error) {
@@ -33,10 +40,17 @@ const AfiliacionesPerfil = () => {
 
         cargarDatos();
     }, []);
+
     const RedireccionarMenu = () => {
         history.push('/Home');
         window.location.reload();
     };
+
+    const habilitarAfiliaciones = () => {
+        debugger
+        setAfiliacionesEnabled(!afiliacionesEnabled);
+    };
+
     return (
         <div className="movilidad-container">
             <div className="row">
@@ -96,8 +110,66 @@ const AfiliacionesPerfil = () => {
                                     disabled
                                 />
                             </div>
+                            {afiliacionesEnabled && (
+                                <>
+                                    <div className="form-group">
+                                        <label htmlFor="pension">Pensión:</label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            id="pension"
+                                            value={perfil.pension}
+                                            onChange={(e) => setPerfil({ ...perfil, pension: e.target.value })}
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="cesantias">Cesantías:</label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            id="cesantias"
+                                            value={perfil.cesantias}
+                                            onChange={(e) => setPerfil({ ...perfil, cesantias: e.target.value })}
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="cesantias">Beneficios Educativos:</label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            id="cesantias"
+                                            value={perfil.cesantias}
+                                            onChange={(e) => setPerfil({ ...perfil, cesantias: e.target.value })}
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="cesantias">ARL:</label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            id="cesantias"
+                                            value={perfil.cesantias}
+                                            onChange={(e) => setPerfil({ ...perfil, cesantias: e.target.value })}
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="cesantias">Seguro de Salud:</label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            id="cesantias"
+                                            value={perfil.cesantias}
+                                            onChange={(e) => setPerfil({ ...perfil, cesantias: e.target.value })}
+                                        />
+                                    </div>
+                                </>
+                            )}
                             <div className="button-container">
                                 <button type="button" className="reject-button">Cancelar</button>
+                                <br/>
+                                <button type="button" onClick={habilitarAfiliaciones}>
+                                    {afiliacionesEnabled ? 'Ocultar Afiliaciones' : 'Afiliaciones'}
+                                </button>
                             </div>
                         </form>
                     </div>

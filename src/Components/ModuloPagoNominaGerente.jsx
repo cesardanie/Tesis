@@ -10,7 +10,7 @@ const mesesDelAno = [
 ];
 
 const ModuloPagoNominaGerente = () => {
-    let history = useHistory();
+  let history = useHistory();
   const [usuarios, setUsuarios] = useState([]);
   const [mesSeleccionado, setMesSeleccionado] = useState('');
   const [estadoPago, setEstadoPago] = useState(''); // Pago, Pendiente, En proceso
@@ -27,17 +27,18 @@ const ModuloPagoNominaGerente = () => {
       });
   }, []); // El segundo parámetro asegura que useEffect solo se ejecute una vez al montar el componente
 
-  const handleRealizarPago = async(index) => {
+  const handleRealizarPago = async (index) => {
     try {
-        console.log(usuarios[index].id)
-        const id=usuarios[index].id
-        const datos = await ServiceNomina.CrearPagoNomina(mesSeleccionado, estadoPago, id);
-        console.log(`Realizando pago para el mes ${mesSeleccionado} con estado ${estadoPago} en la fila ${index}`);
-        window.location.reload();
-        // Puedes manejar la respuesta del servicio según sea necesario
-      } catch (error) {
-        console.error('Error al realizar el pago:', error.message);
-      }
+      debugger
+      console.log(usuarios[index].id)
+      const id = usuarios[index].id
+      const datos = await ServiceNomina.CrearPagoNomina(mesSeleccionado, estadoPago, id);
+      console.log(`Realizando pago para el mes ${mesSeleccionado} con estado ${estadoPago} en la fila ${index}`);
+      window.location.reload();
+      // Puedes manejar la respuesta del servicio según sea necesario
+    } catch (error) {
+      console.error('Error al realizar el pago:', error.message);
+    }
   };
   const RedireccionarMenu = () => {
     history.push('/Gerente');
@@ -47,7 +48,7 @@ const ModuloPagoNominaGerente = () => {
   return (
     <div>
       <h2>Selecciona el pago al colaborador</h2>
-      
+
       {/* Mostrar la tabla de usuarios */}
       <table>
         <thead>
@@ -128,11 +129,11 @@ const ModuloPagoNominaGerente = () => {
               <td>{usuario.Puesto}</td>
               <td>{usuario.Sueldo}</td>
               {usuario?.Nomina?.map((nominaItem, nominaIndex) => (
-  <tr key={nominaIndex}>
-    <td>{nominaItem.Mes}</td>
-    <td>{nominaItem.Estado}</td>
-  </tr>
-))}
+                <tr key={nominaIndex}>
+                  <td>{nominaItem.Mes}</td>
+                  <td>{nominaItem.Estado}</td>
+                </tr>
+              ))}
               <td>
               </td>
             </tr>
