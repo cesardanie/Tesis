@@ -70,15 +70,60 @@ const AfiliacionesPerfil = () => {
                         ARL: data.ARL || '',
                         SegurodeSalud: data.SegurodeSalud || '',
                     });
-                    setHasAfiliacionesData(true); // Indicar que hay datos
+                    setHasAfiliacionesData(true);
                 } else {
-                    setHasAfiliacionesData(false); // No hay datos, mostrar dropdowns
+                    setHasAfiliacionesData(false);
                 }
             } catch (error) {
                 console.error('Error al cargar los datos de afiliaciones:', error.message);
                 setHasAfiliacionesData(false);
             }
         }
+    };
+
+    const handleSubmit = async (event) => {
+        debugger
+        event.preventDefault();
+        console.log('Datos a enviar:', {
+            pension: Afilicaiones.Pension || '',
+            cesantias: Afilicaiones.Cesantias || '',
+            beneficiosEducativos: Afilicaiones.BeneficiosEducativos || '',
+            arl: Afilicaiones.ARL || '',
+            seguroDeSalud: Afilicaiones.SegurodeSalud || '',
+            id: ''
+        });
+    
+        const datosAfiliaciones = {
+            pension: Afilicaiones.Pension || '',
+            cesantias: Afilicaiones.Cesantias || '',
+            beneficiosEducativos: Afilicaiones.BeneficiosEducativos || '',
+            arl: Afilicaiones.ARL || '',
+            seguroDeSalud: Afilicaiones.SegurodeSalud || '',
+            id: ''
+        };
+    
+        try {
+            const response = await ServiceAfiliadosPerfil.GuardarAfiliaciones(datosAfiliaciones);
+            console.log('Respuesta del servidor:', response);
+    
+            if (response.Estado) {
+                console.log('Datos guardados exitosamente:', response.Datos);
+            } else {
+                console.error('Error al guardar los datos:', response.Mensaje);
+            }
+        } catch (error) {
+            console.error('Error en la solicitud:', error.message);
+        }
+    };
+    
+
+    const handleChange = (event) => {
+        const { id, value } = event.target;
+        console.log(`Cambios en ${id}:`, value); // Agrega esta línea para verificar el valor
+        setAfiliaciones(prevState => ({
+            ...prevState,
+            [id]: value
+        }));
     };
 
     return (
@@ -89,7 +134,7 @@ const AfiliacionesPerfil = () => {
                         <div className="card-title">
                             <h4>Perfil</h4> <FaUserCircle />
                         </div>
-                        <form className="create-offer-form">
+                        <form className="create-offer-form" onSubmit={handleSubmit}>
                             <div className="form-group">
                                 <label htmlFor="correo">Correo:</label>
                                 <input
@@ -143,94 +188,103 @@ const AfiliacionesPerfil = () => {
                             {afiliacionesEnabled && (
                                 <>
                                     <div className="form-group">
-                                        <label htmlFor="pension">Pensión:</label>
+                                        <label htmlFor="Pension">Pensión:</label>
                                         {hasAfiliacionesData ? (
                                             <input
                                                 type="text"
                                                 className="form-control"
-                                                id="pension"
+                                                id="Pension"
                                                 value={Afilicaiones.Pension}
                                                 disabled
                                             />
                                         ) : (
-                                            <select className="form-control" id="pension">
+                                            <select className="form-control" id="Pension" value={Afilicaiones.Pension} onChange={handleChange}>
                                                 <option value="">Seleccione una opción</option>
-                                                {/* Agrega aquí las opciones de la lista desplegable */}
+                                                <option value="colpensiones">Colpensiones</option>
+                                                <option value="porvenir">Porvenir</option>
                                             </select>
                                         )}
                                     </div>
                                     <div className="form-group">
-                                        <label htmlFor="cesantias">Cesantías:</label>
+                                        <label htmlFor="Cesantias">Cesantías:</label>
                                         {hasAfiliacionesData ? (
                                             <input
                                                 type="text"
                                                 className="form-control"
-                                                id="cesantias"
+                                                id="Cesantias"
                                                 value={Afilicaiones.Cesantias}
                                                 disabled
                                             />
                                         ) : (
-                                            <select className="form-control" id="cesantias">
+                                            <select className="form-control" id="Cesantias" value={Afilicaiones.Cesantias} onChange={handleChange}>
                                                 <option value="">Seleccione una opción</option>
-                                                {/* Agrega aquí las opciones de la lista desplegable */}
+                                                <option value="colpensiones">Colpensiones</option>
+                                                <option value="porvenir">Porvenir</option>
                                             </select>
                                         )}
                                     </div>
                                     <div className="form-group">
-                                        <label htmlFor="beneficiosEducativos">Beneficios Educativos:</label>
+                                        <label htmlFor="BeneficiosEducativos">Beneficios Educativos:</label>
                                         {hasAfiliacionesData ? (
                                             <input
                                                 type="text"
                                                 className="form-control"
-                                                id="beneficiosEducativos"
+                                                id="BeneficiosEducativos"
                                                 value={Afilicaiones.BeneficiosEducativos}
                                                 disabled
                                             />
                                         ) : (
-                                            <select className="form-control" id="beneficiosEducativos">
+                                            <select className="form-control" id="BeneficiosEducativos" value={Afilicaiones.BeneficiosEducativos} onChange={handleChange}>
                                                 <option value="">Seleccione una opción</option>
-                                                {/* Agrega aquí las opciones de la lista desplegable */}
+                                                <option value="SI">SI</option>
+                                                <option value="NO">NO</option>
                                             </select>
                                         )}
                                     </div>
                                     <div className="form-group">
-                                        <label htmlFor="arl">ARL:</label>
+                                        <label htmlFor="ARL">ARL:</label>
                                         {hasAfiliacionesData ? (
                                             <input
                                                 type="text"
                                                 className="form-control"
-                                                id="arl"
+                                                id="ARL"
                                                 value={Afilicaiones.ARL}
                                                 disabled
                                             />
                                         ) : (
-                                            <select className="form-control" id="arl">
+                                            <select className="form-control" id="ARL" value={Afilicaiones.ARL} onChange={handleChange}>
                                                 <option value="">Seleccione una opción</option>
-                                                {/* Agrega aquí las opciones de la lista desplegable */}
+                                                <option value="sura">Sura</option>
+                                                <option value="Compensar">Compensar</option>
                                             </select>
                                         )}
                                     </div>
                                     <div className="form-group">
-                                        <label htmlFor="seguroDeSalud">Seguro de Salud:</label>
+                                        <label htmlFor="SegurodeSalud">Seguro de Salud:</label>
                                         {hasAfiliacionesData ? (
                                             <input
                                                 type="text"
                                                 className="form-control"
-                                                id="seguroDeSalud"
+                                                id="SegurodeSalud"
                                                 value={Afilicaiones.SegurodeSalud}
                                                 disabled
                                             />
                                         ) : (
-                                            <select className="form-control" id="seguroDeSalud">
+                                            <select className="form-control" id="SegurodeSalud" value={Afilicaiones.SegurodeSalud} onChange={handleChange}>
                                                 <option value="">Seleccione una opción</option>
-                                                {/* Agrega aquí las opciones de la lista desplegable */}
+                                                <option value="si">SI</option>
+                                                <option value="no">NO</option>
                                             </select>
                                         )}
                                     </div>
                                 </>
                             )}
                             <div className="button-container">
-                                <button type="button" className="reject-button">Cancelar</button>
+                                <button type="button" onClick={RedireccionarMenu} className="reject-button">Cancelar</button>
+                                <br />
+                                <button type="submit" className="btn btn-success">
+                                    Guardar
+                                </button>
                                 <br />
                                 <button type="button" onClick={habilitarAfiliaciones}>
                                     {afiliacionesEnabled ? 'Ocultar Afiliaciones' : 'Afiliaciones'}
@@ -240,7 +294,6 @@ const AfiliacionesPerfil = () => {
                     </div>
                 </div>
             </div>
-            <button type="button" onClick={RedireccionarMenu}>Menu Principal</button>
         </div>
     );
 };
