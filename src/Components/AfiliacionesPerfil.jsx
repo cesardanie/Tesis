@@ -14,7 +14,15 @@ const AfiliacionesPerfil = () => {
         pension: '',
         cesantias: ''
     });
+    const [Afilicaiones, setAfiliaciones] = useState({
+        Pension: '',
+        Cesantias: '',
+        BeneficiosEducativos: '',
+        ARL: '',
+        SegurodeSalud: '',
+    });
     const [afiliacionesEnabled, setAfiliacionesEnabled] = useState(false);
+    const [hasAfiliacionesData, setHasAfiliacionesData] = useState(false);
     let history = useHistory();
 
     useEffect(() => {
@@ -46,9 +54,31 @@ const AfiliacionesPerfil = () => {
         window.location.reload();
     };
 
-    const habilitarAfiliaciones = () => {
-        debugger
+    const habilitarAfiliaciones = async () => {
         setAfiliacionesEnabled(!afiliacionesEnabled);
+        if (!afiliacionesEnabled) {
+            try {
+                const response = await ServiceAfiliadosPerfil.CargarAfiliaciones();
+                console.log(response);
+
+                if (response.Estado && response.Datos.Estado) {
+                    const data = response.Datos.Datos[0];
+                    setAfiliaciones({
+                        Pension: data.Pension || '',
+                        Cesantias: data.Cesantias || '',
+                        BeneficiosEducativos: data.BeneficiosEducativos || '',
+                        ARL: data.ARL || '',
+                        SegurodeSalud: data.SegurodeSalud || '',
+                    });
+                    setHasAfiliacionesData(true); // Indicar que hay datos
+                } else {
+                    setHasAfiliacionesData(false); // No hay datos, mostrar dropdowns
+                }
+            } catch (error) {
+                console.error('Error al cargar los datos de afiliaciones:', error.message);
+                setHasAfiliacionesData(false);
+            }
+        }
     };
 
     return (
@@ -114,59 +144,94 @@ const AfiliacionesPerfil = () => {
                                 <>
                                     <div className="form-group">
                                         <label htmlFor="pension">Pensión:</label>
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            id="pension"
-                                            value={perfil.pension}
-                                            onChange={(e) => setPerfil({ ...perfil, pension: e.target.value })}
-                                        />
+                                        {hasAfiliacionesData ? (
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                id="pension"
+                                                value={Afilicaiones.Pension}
+                                                disabled
+                                            />
+                                        ) : (
+                                            <select className="form-control" id="pension">
+                                                <option value="">Seleccione una opción</option>
+                                                {/* Agrega aquí las opciones de la lista desplegable */}
+                                            </select>
+                                        )}
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="cesantias">Cesantías:</label>
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            id="cesantias"
-                                            value={perfil.cesantias}
-                                            onChange={(e) => setPerfil({ ...perfil, cesantias: e.target.value })}
-                                        />
+                                        {hasAfiliacionesData ? (
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                id="cesantias"
+                                                value={Afilicaiones.Cesantias}
+                                                disabled
+                                            />
+                                        ) : (
+                                            <select className="form-control" id="cesantias">
+                                                <option value="">Seleccione una opción</option>
+                                                {/* Agrega aquí las opciones de la lista desplegable */}
+                                            </select>
+                                        )}
                                     </div>
                                     <div className="form-group">
-                                        <label htmlFor="cesantias">Beneficios Educativos:</label>
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            id="cesantias"
-                                            value={perfil.cesantias}
-                                            onChange={(e) => setPerfil({ ...perfil, cesantias: e.target.value })}
-                                        />
+                                        <label htmlFor="beneficiosEducativos">Beneficios Educativos:</label>
+                                        {hasAfiliacionesData ? (
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                id="beneficiosEducativos"
+                                                value={Afilicaiones.BeneficiosEducativos}
+                                                disabled
+                                            />
+                                        ) : (
+                                            <select className="form-control" id="beneficiosEducativos">
+                                                <option value="">Seleccione una opción</option>
+                                                {/* Agrega aquí las opciones de la lista desplegable */}
+                                            </select>
+                                        )}
                                     </div>
                                     <div className="form-group">
-                                        <label htmlFor="cesantias">ARL:</label>
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            id="cesantias"
-                                            value={perfil.cesantias}
-                                            onChange={(e) => setPerfil({ ...perfil, cesantias: e.target.value })}
-                                        />
+                                        <label htmlFor="arl">ARL:</label>
+                                        {hasAfiliacionesData ? (
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                id="arl"
+                                                value={Afilicaiones.ARL}
+                                                disabled
+                                            />
+                                        ) : (
+                                            <select className="form-control" id="arl">
+                                                <option value="">Seleccione una opción</option>
+                                                {/* Agrega aquí las opciones de la lista desplegable */}
+                                            </select>
+                                        )}
                                     </div>
                                     <div className="form-group">
-                                        <label htmlFor="cesantias">Seguro de Salud:</label>
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            id="cesantias"
-                                            value={perfil.cesantias}
-                                            onChange={(e) => setPerfil({ ...perfil, cesantias: e.target.value })}
-                                        />
+                                        <label htmlFor="seguroDeSalud">Seguro de Salud:</label>
+                                        {hasAfiliacionesData ? (
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                id="seguroDeSalud"
+                                                value={Afilicaiones.SegurodeSalud}
+                                                disabled
+                                            />
+                                        ) : (
+                                            <select className="form-control" id="seguroDeSalud">
+                                                <option value="">Seleccione una opción</option>
+                                                {/* Agrega aquí las opciones de la lista desplegable */}
+                                            </select>
+                                        )}
                                     </div>
                                 </>
                             )}
                             <div className="button-container">
                                 <button type="button" className="reject-button">Cancelar</button>
-                                <br/>
+                                <br />
                                 <button type="button" onClick={habilitarAfiliaciones}>
                                     {afiliacionesEnabled ? 'Ocultar Afiliaciones' : 'Afiliaciones'}
                                 </button>

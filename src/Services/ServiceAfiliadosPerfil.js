@@ -30,7 +30,7 @@ const ServiceAfiliadosPerfil = {
             const id = sessionObject.id;
 
             // El ID debe ser parte del cuerpo de la solicitud como un objeto
-            const response = await axios.post('http://localhost:3023/apiDiez/DatosPerfil', { id },
+            const response = await axios.post('http://localhost:3023/apiDiez/DatosAfiliaciones', { id },
                 {
                     headers: {
                         'authorization': `${token}`,
