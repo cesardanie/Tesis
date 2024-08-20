@@ -42,6 +42,11 @@ const HomeGerente = () => {
     history.push('/MovilidadInternaGerente');
     window.location.reload();
   };
+  const Redireccionarafiliaciones = () => {
+    history.push('/AfilicacionesGerente');
+    ///AfilicacionesGerente
+    window.location.reload();
+  };
 
   const cerrarSesion = () => {
     SessionService.clearSession();
@@ -93,6 +98,13 @@ const HomeGerente = () => {
           <h2>Movilidad Interna</h2>
           <p>Gestiona las solicitudes de cambios de posición o área dentro de la empresa crea solicitudes para la empresa.</p>
           <button className="button option" onClick={RedireccionarMovilidadInterna}>
+            Movilidad Interna
+          </button>
+        </div>
+        <div className="option">
+          <h2>Afiliciones</h2>
+          <p>Gestiona las solicitudes de cambio de las afilicaciones.</p>
+          <button className="button option" onClick={Redireccionarafiliaciones}>
             Movilidad Interna
           </button>
         </div>

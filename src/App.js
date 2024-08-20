@@ -22,6 +22,7 @@ import FileDownloader from './Components/FileDownloader';
 import MovilidadinternaClient from './Components/MovilidadinternaClient';
 import OfertaMovilidadInterna from './Components/OfertaMovilidadInterna';
 import AfilacionesPerfil from '../src/Components/AfiliacionesPerfil';
+import AfiliacionesGerente from './Components/AfiliacionesGerente';
 function App() {
 
 
@@ -48,6 +49,7 @@ function App() {
         <PrivateRoute path="/PerfilAfilaciones"  component={ AfilacionesPerfil} roles={['Empleado']}/>
         <PrivateRoute path="/GerenteDias"  component={GestionarDiasAdmi} roles={['Administrador']}/>
         <PrivateRoute path="/MovilidadInternaGerente"  component={OfertaMovilidadInterna} roles={['Administrador']}/>
+        <PrivateRoute path="/AfilicacionesGerente"  component={AfiliacionesGerente} roles={['Administrador']}/>
         <Route path="/" exact component={Login}/>
         <Route path="*" component={NotFound} />
       </Switch>
