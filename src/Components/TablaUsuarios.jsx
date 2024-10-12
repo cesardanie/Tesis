@@ -43,12 +43,12 @@ const TablaUsuarios = () => {
 
   const agregarUsuario = async () => {
     try {
-      console.log(nuevoUsuario);
+      debugger
       // Llama al servicio para enviar todos los datos del nuevo usuario a la API
       const response = await ServiceUsuarios.AgregarUsuario(nuevoUsuario);
       const estado = response.Estado;
       console.log(response);
-  
+
       // Si el usuario se agregó exitosamente, recarga la lista de usuarios
       if (estado === true) {
         // Llama a la función cargarUsuarios para obtener la lista actualizada desde la API
@@ -56,9 +56,9 @@ const TablaUsuarios = () => {
         window.alert('Usuario Agregado con éxito');
       } else {
         window.alert('El Usuario ya existe y no se puede agregar');
-        
+
       }
-  
+
       // Reinicia el estado de nuevoUsuario después de agregarlo
       setNuevoUsuario((prevUsuario) => ({
         ...prevUsuario,
@@ -99,6 +99,21 @@ const TablaUsuarios = () => {
       cargarUsuarios();
     }
   }, [reloadTable, history]); // El segundo argumento es un array de dependencias, en este caso, está vacío, lo que significa que se ejecutará una vez al montar el componente.
+  // Función para calcular la edad a partir de la fecha de nacimiento
+  const calcularEdad = (fechaNacimiento) => {
+    const hoy = new Date();
+    const nacimiento = new Date(fechaNacimiento);
+
+    let edad = hoy.getFullYear() - nacimiento.getFullYear();
+    const mes = hoy.getMonth() - nacimiento.getMonth();
+
+    // Ajusta si el mes actual es anterior al mes de nacimiento
+    if (mes < 0 || (mes === 0 && hoy.getDate() < nacimiento.getDate())) {
+      edad--;
+    }
+
+    return edad;
+  };
 
   return (
     <div>
@@ -125,7 +140,7 @@ const TablaUsuarios = () => {
                 <td>{usuario.Contrasena}</td>
                 <td>{usuario.Rol}</td>
                 <td>{usuario.Nombre}</td>
-                <td>{usuario.Edad}</td>
+                <td>{calcularEdad(usuario.Edad)}</td>
                 <td>{usuario.Puesto}</td>
                 <td>{usuario.Sueldo}</td>
                 <td>
@@ -187,7 +202,7 @@ const TablaUsuarios = () => {
         <label>
           Edad:
           <input
-            type="text"
+            type="date"
             name="Edad"
             value={nuevoUsuario.Edad}
             onChange={handleInputChange}

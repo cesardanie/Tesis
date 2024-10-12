@@ -44,6 +44,20 @@ const ModuloPagoNominaGerente = () => {
     history.push('/Gerente');
     window.location.reload();
   };
+  const calcularEdad = (fechaNacimiento) => {
+    const hoy = new Date();
+    const nacimiento = new Date(fechaNacimiento);
+
+    let edad = hoy.getFullYear() - nacimiento.getFullYear();
+    const mes = hoy.getMonth() - nacimiento.getMonth();
+
+    // Ajusta si el mes actual es anterior al mes de nacimiento
+    if (mes < 0 || (mes === 0 && hoy.getDate() < nacimiento.getDate())) {
+      edad--;
+    }
+
+    return edad;
+  };
 
   return (
     <div>
@@ -72,7 +86,7 @@ const ModuloPagoNominaGerente = () => {
               <td>{usuario.Contrasena}</td>
               <td>{usuario.Rol}</td>
               <td>{usuario.Nombre}</td>
-              <td>{usuario.Edad}</td>
+              <td>{calcularEdad(usuario.Edad)}</td>
               <td>{usuario.Puesto}</td>
               <td>{usuario.Sueldo}</td>
               <td>
@@ -125,7 +139,7 @@ const ModuloPagoNominaGerente = () => {
               <td>{usuario.Contrasena}</td>
               <td>{usuario.Rol}</td>
               <td>{usuario.Nombre}</td>
-              <td>{usuario.Edad}</td>
+              <td>{calcularEdad(usuario.Edad)}</td>
               <td>{usuario.Puesto}</td>
               <td>{usuario.Sueldo}</td>
               {usuario?.Nomina?.map((nominaItem, nominaIndex) => (

@@ -34,7 +34,7 @@ const AfiliacionesPerfil = () => {
                     setPerfil({
                         correo: data.Correo || '',
                         nombre: data.Nombre || '',
-                        edad: data.Edad || '',
+                        edad: calcularEdad(data.Edad) || '',
                         puesto: data.Puesto || '',
                         sueldo: data.Sueldo || '',
                         pension: '',
@@ -48,7 +48,20 @@ const AfiliacionesPerfil = () => {
 
         cargarDatos();
     }, []);
-
+    const calcularEdad = (fechaNacimiento) => {
+        const hoy = new Date();
+        const nacimiento = new Date(fechaNacimiento);
+    
+        let edad = hoy.getFullYear() - nacimiento.getFullYear();
+        const mes = hoy.getMonth() - nacimiento.getMonth();
+    
+        // Ajusta si el mes actual es anterior al mes de nacimiento
+        if (mes < 0 || (mes === 0 && hoy.getDate() < nacimiento.getDate())) {
+          edad--;
+        }
+    
+        return edad;
+      };
     const RedireccionarMenu = () => {
         history.push('/Home');
         window.location.reload();
@@ -108,6 +121,7 @@ const AfiliacionesPerfil = () => {
     
             if (response.Estado) {
                 console.log('Datos guardados exitosamente:', response.Datos);
+                window.location.reload();
             } else {
                 console.error('Error al guardar los datos:', response.Mensaje);
             }
