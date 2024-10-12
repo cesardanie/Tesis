@@ -9,25 +9,28 @@ const AfiliacionesGerente = () => {
   const [editandoUsuario, setEditandoUsuario] = useState(null);
   const [usuarioEditado, setUsuarioEditado] = useState({});
   let history = useHistory();
-  useEffect(() => {
-    const cargarDatos = async () => {
-      try {
-        const response = await ServiceAfiliadosPerfil.CargarDatosdeAfiliados();
-        if (response.Estado) {
-          setUsuarios(response.Datos.Datos);
-        } else {
-          console.error('Error en la respuesta de la API:', response.data);
-        }
-      } catch (error) {
-        console.error('Error al cargar los datos:', error);
-      }
-    };
-    cargarDatos();
-  }, []);
+  const [reload, setReload] = useState(false);
+    // Ejecutar la carga de datos al montar el componente
+    useEffect(() => {
+      cargarDatos();
+    }, [reload]);
+ 
 
   const handleEditarClick = (usuario) => {
     setEditandoUsuario(usuario.idUsuario);
     setUsuarioEditado({ ...usuario });
+  };
+  const cargarDatos = async () => {
+    try {
+      const response = await ServiceAfiliadosPerfil.CargarDatosdeAfiliados();
+      if (response.Estado) {
+        setUsuarios(response.Datos.Datos);
+      } else {
+        console.error('Error en la respuesta de la API:', response.data);
+      }
+    } catch (error) {
+      console.error('Error al cargar los datos:', error);
+    }
   };
 
   const handleInputChange = (e) => {
@@ -42,9 +45,11 @@ const AfiliacionesGerente = () => {
   };
   const handleGuardarClick = async () => {
     try {
-      const response = await ServiceAfiliadosPerfil.GuardarDatosEditados(usuarioEditado);
+      debugger
+      const response = await ServiceAfiliadosPerfil.GuardarAfilicacionesEditadas(usuarioEditado);
       console.log('Datos guardados:', response);
       setEditandoUsuario(null);
+      setReload(!reload);
     } catch (error) {
       console.error('Error al guardar los datos:', error);
     }
