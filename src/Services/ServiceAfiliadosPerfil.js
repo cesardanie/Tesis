@@ -51,7 +51,7 @@ const ServiceAfiliadosPerfil = {
             data.id=id;
 
             // El ID debe ser parte del cuerpo de la solicitud como un objeto
-            const response = await axios.post('http://localhost:3023/apiDiez/PostAfiliaciones', { data},
+            const response = await axios.post('http://localhost:3023/apiDiez/PostAfiliacionesinsertar', { data},
                 {
                     headers: {
                         'authorization': `${token}`,

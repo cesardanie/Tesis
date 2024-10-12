@@ -96,6 +96,11 @@ const AfiliacionesPerfil = () => {
 
     const handleSubmit = async (event) => {
         debugger
+        debugger
+        const sessionString = localStorage.getItem('session');
+        const sessionObject = JSON.parse(sessionString);
+        const token = sessionObject.token;
+        const id = sessionObject.id;
         event.preventDefault();
         console.log('Datos a enviar:', {
             pension: Afilicaiones.Pension || '',
@@ -103,7 +108,7 @@ const AfiliacionesPerfil = () => {
             beneficiosEducativos: Afilicaiones.BeneficiosEducativos || '',
             arl: Afilicaiones.ARL || '',
             seguroDeSalud: Afilicaiones.SegurodeSalud || '',
-            id: ''
+            id: id
         });
     
         const datosAfiliaciones = {
@@ -112,7 +117,7 @@ const AfiliacionesPerfil = () => {
             beneficiosEducativos: Afilicaiones.BeneficiosEducativos || '',
             arl: Afilicaiones.ARL || '',
             seguroDeSalud: Afilicaiones.SegurodeSalud || '',
-            id: ''
+            id: id||''
         };
     
         try {
