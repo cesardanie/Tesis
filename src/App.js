@@ -24,8 +24,6 @@ import OfertaMovilidadInterna from './Components/OfertaMovilidadInterna';
 import AfilacionesPerfil from '../src/Components/AfiliacionesPerfil';
 import AfiliacionesGerente from './Components/AfiliacionesGerente';
 function App() {
-
-
   return (
    
     <Router>

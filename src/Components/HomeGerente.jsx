@@ -102,10 +102,10 @@ const HomeGerente = () => {
           </button>
         </div>
         <div className="option">
-          <h2>Afiliciones</h2>
+          <h2>Afiliaciones</h2>
           <p>Gestiona las solicitudes de cambio de las afilicaciones.</p>
           <button className="button option" onClick={Redireccionarafiliaciones}>
-            Movilidad Interna
+          Afiliaciones
           </button>
         </div>
       </div>
