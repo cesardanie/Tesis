@@ -6,7 +6,7 @@ const ServiceNomina = {
         const sessionString = localStorage.getItem('session');
         const sessionObject = JSON.parse(sessionString);
         const token = sessionObject.token;
-        const response = await axios.get('http://localhost:3023/apicinco/ExtraerDatosNomina',{
+        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL_PROD}/apicinco/ExtraerDatosNomina`,{
             headers: {
                 'authorization': `${token}`,
               }
@@ -23,7 +23,7 @@ const ServiceNomina = {
         const sessionString = localStorage.getItem('session');
         const sessionObject = JSON.parse(sessionString);
         const token = sessionObject.token;
-        const response = await axios.post('http://localhost:3023/apicinco/AgregarPagos',{mes:mesSeleccionado,estado:estado,id:id},{
+        const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL_PROD}/apicinco/AgregarPagos`,{mes:mesSeleccionado,estado:estado,id:id},{
             headers: {
                 'authorization': `${token}`,
               }
@@ -41,7 +41,7 @@ const ServiceNomina = {
         const sessionObject = JSON.parse(sessionString);
         const token = sessionObject.token;
         const id=sessionObject.id
-        const response = await axios.post('http://localhost:3023/apicinco/ExtraerDatosNominaCliente',{id:id},{
+        const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL_PROD}/ExtraerDatosNominaCliente`,{id:id},{
             headers: {
                 'authorization': `${token}`,
               }

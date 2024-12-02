@@ -8,7 +8,7 @@ const ServicioMovilidadInterna = {
       const token = sessionObject.token;
 
       const response = await axios.get(
-        'http://localhost:3023/apinueve/Movilidadinterna',
+        `${process.env.REACT_APP_API_BASE_URL_PROD}/apinueve/Movilidadinterna`,
         {
           headers: {
             'authorization': `Bearer ${token}`, // Usa 'Bearer' en el header de autorización
@@ -30,7 +30,7 @@ const ServicioMovilidadInterna = {
       const token = sessionObject.token;
       console.log(nuevaOferta)
       const response = await axios.post(
-        'http://localhost:3023/apinueve/CreacionMovilidadInterna',
+        `${process.env.REACT_APP_API_BASE_URL_PROD}/apinueve/CreacionMovilidadInterna`,
         {
           TituloOferta: nuevaOferta.TituloOferta,
           Estado: nuevaOferta.Estado, // Asegúrate de que el campo 'Estado' esté en el cuerpo del POST
@@ -59,7 +59,7 @@ const ServicioMovilidadInterna = {
       const sessionObject = JSON.parse(sessionString);
       const token = sessionObject.token;
       const response = await axios.post(
-        'http://localhost:3023/apinueve/MovilidadInternaAplicacion',
+        `${process.env.REACT_APP_API_BASE_URL_PROD}/apinueve/MovilidadInternaAplicacion`,
         { aplicacion },
         {
           headers: {
@@ -82,7 +82,7 @@ const ServicioMovilidadInterna = {
       const token = sessionObject.token;
 
       const response = await axios.get(
-        'http://localhost:3023/apinueve/Getofertas',
+        `${process.env.REACT_APP_API_BASE_URL_PROD}/apinueve/Getofertas`,
         {
           headers: {
             'authorization': `Bearer ${token}`, // Usa 'Bearer' en el header de autorización
@@ -103,7 +103,7 @@ const ServicioMovilidadInterna = {
       const token = sessionObject.token;
 
       const response = await axios.post(
-        'http://localhost:3023/apinueve/EliminarAplicacion', { aplicacion },
+        `${process.env.REACT_APP_API_BASE_URL_PROD}/apinueve/EliminarAplicacion`, { aplicacion },
         {
           headers: {
             'authorization': `Bearer ${token}`, // Usa 'Bearer' en el header de autorización
@@ -125,7 +125,7 @@ const ServicioMovilidadInterna = {
       const token = sessionObject.token;
 
       const response = await axios.post(
-        'http://localhost:3023/apinueve/Eliminaroferta', { Id },
+        `${process.env.REACT_APP_API_BASE_URL_PROD}/apinueve/Eliminaroferta`, { Id },
         {
           headers: {
             'authorization': `Bearer ${token}`, // Usa 'Bearer' en el header de autorización

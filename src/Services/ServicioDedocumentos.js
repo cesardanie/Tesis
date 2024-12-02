@@ -9,7 +9,7 @@ const ServicioDedocumentos = {
       
       // Incluir el 'id' en los datos que se envían en la solicitud POST
       const response = await axios.post(
-        'http://localhost:3023/apisiete/ObtenerCertificadolaboral',
+        `${process.env.REACT_APP_API_BASE_URL_PROD}/apisiete/ObtenerCertificadolaboral`,
         { id: id , Opcion:numero, tipo:tipo}, // Aquí se envía el id como parte de los datos
         {
           headers: {

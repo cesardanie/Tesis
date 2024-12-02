@@ -30,7 +30,7 @@ const ServiceAfiliadosPerfil = {
             const id = sessionObject.id;
 
             // El ID debe ser parte del cuerpo de la solicitud como un objeto
-            const response = await axios.post('http://localhost:3023/apiDiez/DatosAfiliaciones', { id },
+            const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL_PROD}/apiDiez/DatosAfiliaciones`, { id },
                 {
                     headers: {
                         'authorization': `${token}`,
@@ -51,7 +51,7 @@ const ServiceAfiliadosPerfil = {
             data.id=id;
 
             // El ID debe ser parte del cuerpo de la solicitud como un objeto
-            const response = await axios.post('http://localhost:3023/apiDiez/PostAfiliacionesinsertar', { data},
+            const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL_PROD}/apiDiez/PostAfiliacionesinsertar`, { data},
                 {
                     headers: {
                         'authorization': `${token}`,
@@ -69,7 +69,7 @@ const ServiceAfiliadosPerfil = {
             const sessionObject = JSON.parse(sessionString);
             const token = sessionObject.token;
             // El ID debe ser parte del cuerpo de la solicitud como un objeto
-            const response = await axios.post('http://localhost:3023/apiDiez/PostAfiliaciones', { data},
+            const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL_PROD}/apiDiez/PostAfiliaciones`, { data},
                 {
                     headers: {
                         'authorization': `${token}`,
@@ -89,7 +89,7 @@ const ServiceAfiliadosPerfil = {
             const id = sessionObject.id;
 
             // El ID debe ser parte del cuerpo de la solicitud como un objeto
-            const response = await axios.get('http://localhost:3023/apiDiez/GetUsuariosAfiliados',
+            const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL_PROD}/apiDiez/GetUsuariosAfiliados`,
                 {
                     headers: {
                         'authorization': `${token}`,
